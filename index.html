@@ -1,0 +1,2594 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#050914">
+    <meta property="og:title" content="Undangan Natal Remaja - SILENT NIGHT (MDC Kadipaten)">
+    <meta property="og:description" content="Youth Christmas Celebration • Senin, 21 Desember 2026 • 15:00 WIB di GKPB MDC Kadipaten. Ada konsumsi, souvenir, doorprize & tukar kado!">
+    <meta property="og:type" content="website">
+    <title>Undangan Natal Remaja - SILENT NIGHT (MDC Kadipaten)</title>
+    <style>
+        /* =====================================================================
+           1. RESET & DASAR (100% PURE CSS, ZERO EXTERNAL CDN)
+        ===================================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            height: 100dvh;
+            overflow: hidden;
+            background-color: #050914;
+            color: #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .font-serif-title {
+            font-family: "Georgia", "Times New Roman", "Palatino Linotype", serif;
+        }
+
+        .font-serif-italic {
+            font-family: "Georgia", "Times New Roman", "Palatino Linotype", serif;
+            font-style: italic;
+        }
+
+        .pixel-crisp {
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -webkit-crisp-edges;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        /* =====================================================================
+           2. CANVAS LATAR & KARAKTER (FIXED FULLSCREEN)
+        ===================================================================== */
+        #bg-canvas,
+        #char-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: block;
+        }
+
+        #bg-canvas {
+            z-index: 1;
+        }
+
+        #char-canvas {
+            z-index: 25;
+        }
+
+        /* =====================================================================
+           3. TOMBOL MUSIK MINIMALIS (POJOK KANAN ATAS, Z-INDEX 60)
+        ===================================================================== */
+        #music-btn {
+            position: fixed;
+            top: calc(12px + env(safe-area-inset-top));
+            right: 14px;
+            z-index: 60;
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            border: 1px solid rgba(245, 214, 138, 0.28);
+            background: rgba(12, 18, 36, 0.74);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            color: #f8fafc;
+            font-size: 17px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.42);
+            transition: transform 0.16s ease, background-color 0.2s ease, border-color 0.2s ease;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        #music-btn:active {
+            transform: scale(0.92);
+        }
+
+        /* =====================================================================
+           4. SPLASH COVER PENUH LAYAR (DARK MIDNIGHT GLASS OVERLAY)
+        ===================================================================== */
+        #splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 100dvh;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: calc(20px + env(safe-area-inset-top)) 20px calc(20px + env(safe-area-inset-bottom));
+            background: rgba(8, 13, 28, 0.88);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            opacity: 1;
+            transition: opacity 0.55s ease, transform 0.55s ease;
+            cursor: pointer;
+        }
+
+        #splash.fade-out {
+            opacity: 0;
+            transform: scale(1.02);
+            pointer-events: none;
+        }
+
+        .splash-inner {
+            width: 100%;
+            max-width: 380px;
+            max-height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 12px 6px;
+        }
+
+        .splash-logo-wrap {
+            width: 100%;
+            margin: 0 auto 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mdc-logo-svg {
+            display: block;
+            margin: 0 auto;
+            height: auto;
+            pointer-events: none;
+            -webkit-user-select: none;
+            user-select: none;
+            filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.45));
+        }
+
+        .splash-logo-svg {
+            width: 225px;
+            max-width: 76%;
+        }
+
+        .card-logo-svg {
+            width: 195px;
+            max-width: 70%;
+        }
+
+        .eyebrow-pill {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 999px;
+            background: rgba(245, 214, 138, 0.10);
+            border: 1px solid rgba(245, 214, 138, 0.25);
+            color: #f5d68a;
+            font-size: 9.5px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .gold-title {
+            background: linear-gradient(180deg, #fffbeb 0%, #f5d68a 55%, #d9a441 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 24px rgba(245, 214, 138, 0.24);
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            line-height: 1.15;
+        }
+
+        .splash-title {
+            font-size: clamp(28px, 7.8vw, 36px);
+        }
+
+        .splash-slogan {
+            font-size: clamp(16.5px, 4.6vw, 20px);
+            color: rgba(245, 214, 138, 0.90);
+            margin-top: 4px;
+        }
+
+        .splash-pill-date {
+            margin-top: 12px;
+            margin-bottom: 20px;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(245, 214, 138, 0.20);
+            color: #e2e8f0;
+            font-size: 12.5px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+
+        /* 3 Preview Karakter Pixel 2D Anonim */
+        .splash-chars-row {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        .splash-char-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pixelFloat 2.6s ease-in-out infinite;
+        }
+
+        .splash-char-item:nth-child(2) {
+            animation-delay: 0.45s;
+        }
+
+        .splash-char-item:nth-child(3) {
+            animation-delay: 0.9s;
+        }
+
+        .splash-char-canvas {
+            width: 56px;
+            height: 70px;
+            display: block;
+            filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.55));
+        }
+
+        .splash-char-item:nth-child(2) .splash-char-canvas {
+            width: 62px;
+            height: 78px;
+        }
+
+        /* Tombol Utama Gradasi Emas Hangat */
+        .btn-gold-cta {
+            appearance: none;
+            -webkit-appearance: none;
+            border: none;
+            border-radius: 999px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #f5d68a 0%, #e8c068 50%, #d9a441 100%);
+            color: #0b1120;
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            box-shadow: 0 10px 28px rgba(217, 164, 65, 0.34);
+            animation: goldPulse 2.6s ease-in-out infinite;
+            transition: transform 0.16s ease, filter 0.16s ease;
+        }
+
+        .btn-gold-cta:active {
+            transform: scale(0.95);
+            filter: brightness(0.96);
+        }
+
+        .splash-hint {
+            margin-top: 13px;
+            font-size: 11.5px;
+            color: #94a3b8;
+            animation: softBlink 2.2s ease-in-out infinite;
+        }
+
+        /* =====================================================================
+           5. KONTAINER UTAMA & KARTU DARK MIDNIGHT-GOLD GLASSMORPHISM
+        ===================================================================== */
+        #app-stage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 100dvh;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: calc(56px + env(safe-area-inset-top)) 14px calc(18px + env(safe-area-inset-bottom));
+            pointer-events: none;
+        }
+
+        .invite-shell {
+            pointer-events: auto;
+            width: 100%;
+            max-width: 420px;
+            max-height: 82dvh;
+            display: flex;
+            flex-direction: column;
+            background: rgba(12, 18, 36, 0.72);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(245, 214, 138, 0.24);
+            border-radius: 26px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.52);
+            overflow: hidden;
+        }
+
+        #card-scroll {
+            width: 100%;
+            flex: 1 1 auto;
+            min-height: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+            touch-action: pan-y;
+            scroll-behavior: smooth;
+            padding: 26px 20px 26px;
+            text-align: center;
+        }
+
+        #card-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        #card-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        #card-scroll::-webkit-scrollbar-thumb {
+            background: rgba(245, 214, 138, 0.28);
+            border-radius: 999px;
+        }
+
+        .card-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-logo-wrap {
+            width: 100%;
+            margin: 0 auto 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-title {
+            font-size: clamp(25px, 7vw, 33px);
+        }
+
+        .card-slogan {
+            font-size: clamp(16px, 4.4vw, 19px);
+            color: rgba(245, 214, 138, 0.90);
+            margin-top: 3px;
+        }
+
+        /* Pemisah Emas Tipis Elegan */
+        .gold-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin: 16px 0;
+        }
+
+        .gold-divider-wide {
+            margin: 26px 0 22px;
+        }
+
+        .gold-line-l {
+            flex: 1;
+            max-width: 90px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(245, 214, 138, 0.45));
+        }
+
+        .gold-line-r {
+            flex: 1;
+            max-width: 90px;
+            height: 1px;
+            background: linear-gradient(to left, transparent, rgba(245, 214, 138, 0.45));
+        }
+
+        .gold-star {
+            color: #f5d68a;
+            font-size: 12px;
+        }
+
+        /* Sub-Panel Info Acara */
+        .info-list {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(245, 214, 138, 0.16);
+            border-radius: 18px;
+            text-align: left;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .info-hr {
+            height: 1px;
+            width: 100%;
+            background: rgba(245, 214, 138, 0.12);
+            margin: 10px 0;
+        }
+
+        .info-icon {
+            width: 34px;
+            height: 34px;
+            flex-shrink: 0;
+            border-radius: 11px;
+            background: rgba(245, 214, 138, 0.11);
+            border: 1px solid rgba(245, 214, 138, 0.22);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            margin-top: 1px;
+        }
+
+        .info-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .info-label {
+            display: block;
+            font-size: 9.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.13em;
+            color: #cbd5e1;
+            margin-bottom: 2px;
+        }
+
+        .info-value {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #f8fafc;
+            line-height: 1.42;
+        }
+
+        .info-value-loc {
+            font-size: 12.6px;
+            font-weight: 500;
+            color: #f5d68a;
+            line-height: 1.46;
+        }
+
+        /* Tombol Google Maps Pill Midnight-Gold */
+        .btn-maps {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 8px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            background: rgba(245, 214, 138, 0.14);
+            border: 1px solid rgba(245, 214, 138, 0.35);
+            color: #f5d68a;
+            font-size: 11.5px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: transform 0.16s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn-maps:hover {
+            background: rgba(245, 214, 138, 0.22);
+            border-color: rgba(245, 214, 138, 0.52);
+        }
+
+        .btn-maps:active {
+            transform: scale(0.95);
+            background: rgba(245, 214, 138, 0.26);
+        }
+
+        /* Highlight Box Konsumsi, Souvenir & Ada Doorprize */
+        .perks-card {
+            width: 100%;
+            margin-top: 12px;
+            padding: 13px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: left;
+            background: rgba(245, 214, 138, 0.08);
+            border: 1px solid rgba(245, 214, 138, 0.22);
+            border-radius: 16px;
+        }
+
+        .perk-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fef3c7;
+            line-height: 1.4;
+        }
+
+        /* Tombol Pill Navigasi Scroll */
+        .btn-scroll-pill {
+            appearance: none;
+            -webkit-appearance: none;
+            margin-top: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: rgba(245, 214, 138, 0.12);
+            border: 1px solid rgba(245, 214, 138, 0.28);
+            color: #f5d68a;
+            font-size: 12.2px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.16s ease, background-color 0.2s ease;
+        }
+
+        .btn-scroll-pill:active {
+            transform: scale(0.95);
+            background: rgba(245, 214, 138, 0.20);
+        }
+
+        .btn-scroll-pill-subtle {
+            color: #cbd5e1;
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(245, 214, 138, 0.18);
+        }
+
+        /* Section 2: Tukar Kado Natal */
+        .gift-heading {
+            font-size: clamp(20px, 5.4vw, 24px);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: #f5d68a;
+        }
+
+        .gift-intro {
+            margin-top: 10px;
+            font-size: 12.6px;
+            color: #cbd5e1;
+            line-height: 1.56;
+        }
+
+        .gift-table-box {
+            width: 100%;
+            margin-top: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(245, 214, 138, 0.18);
+            border-radius: 18px;
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .gift-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12.6px;
+        }
+
+        .gift-table thead tr {
+            background: rgba(245, 214, 138, 0.11);
+            border-bottom: 1px solid rgba(245, 214, 138, 0.18);
+            color: #f5d68a;
+        }
+
+        .gift-table th {
+            padding: 10px 12px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+        }
+
+        .gift-table th:first-child {
+            width: 44px;
+            text-align: center;
+        }
+
+        .gift-table td {
+            padding: 10px 12px;
+            color: #f8fafc;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            vertical-align: top;
+            line-height: 1.44;
+        }
+
+        .gift-table tbody tr:nth-child(odd) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .gift-num {
+            text-align: center;
+            font-weight: 800;
+            color: #f5d68a;
+        }
+
+        .hl-gold {
+            font-weight: 700;
+            color: #f5d68a;
+        }
+
+        .hl-rose {
+            font-weight: 700;
+            color: #fda4af;
+        }
+
+        .gift-closing {
+            margin-top: 16px;
+            font-size: 14.5px;
+            font-weight: 600;
+            color: #f5d68a;
+            letter-spacing: 0.02em;
+        }
+
+        .interactive-hint {
+            margin-top: 14px;
+            font-size: 11px;
+            color: #94a3b8;
+            line-height: 1.45;
+        }
+
+        /* =====================================================================
+           6. ANIMASI KEYFRAMES & RESPONSIVITAS LAYAR KECIL
+        ===================================================================== */
+        @keyframes pixelFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-7px); }
+        }
+
+        @keyframes goldPulse {
+            0%, 100% { box-shadow: 0 8px 24px rgba(217, 164, 65, 0.30); }
+            50% { box-shadow: 0 10px 34px rgba(245, 214, 138, 0.54); }
+        }
+
+        @keyframes softBlink {
+            0%, 100% { opacity: 0.55; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes nudgeDown {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(3px); }
+        }
+
+        .arrow-nudge {
+            display: inline-block;
+            animation: nudgeDown 1.4s ease-in-out infinite;
+        }
+
+        @media (max-width: 370px) {
+            #card-scroll {
+                padding: 20px 15px 22px;
+            }
+            .splash-logo-svg {
+                width: 192px;
+            }
+            .card-logo-svg {
+                width: 168px;
+            }
+            .splash-chars-row {
+                gap: 12px;
+            }
+            .splash-char-canvas {
+                width: 48px;
+                height: 60px;
+            }
+            .splash-char-item:nth-child(2) .splash-char-canvas {
+                width: 54px;
+                height: 68px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =====================================================================
+         SPLASH COVER PENUH LAYAR (DARK MIDNIGHT GLASS OVERLAY)
+    ====================================================================== -->
+    <div id="splash" role="button" tabindex="0" aria-label="Buka Undangan dan Nyalakan Musik">
+        <div class="splash-inner">
+            <!-- Logo Vektor SVG Inline MDC Kadipaten (100% Mandiri untuk Share WA) -->
+            <div class="splash-logo-wrap">
+                <svg class="mdc-logo-svg splash-logo-svg" viewBox="0 0 420 225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Keluarga MDC Masa Depan Cerah Kadipaten">
+                    <defs>
+                        <linearGradient id="mdcBarSplash" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#9ca3af"/>
+                            <stop offset="52%" stop-color="#d4d8df"/>
+                            <stop offset="100%" stop-color="#ffffff"/>
+                        </linearGradient>
+                        <linearGradient id="mdcSwooshSplash" x1="100%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#f8fafc"/>
+                            <stop offset="55%" stop-color="#cbd5e1"/>
+                            <stop offset="100%" stop-color="#94a3b8"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Teks KELUARGA tegak lurus tepat di atas huruf D dan C -->
+                    <text x="194" y="49" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="21.5" font-weight="800" letter-spacing="6.2">KELUARGA</text>
+
+                    <!-- Huruf M (vektor presisi: kaki kiri + diagonal kiri, dan kaki kanan terpotong rapi di bawah swoosh) -->
+                    <path d="M 22 60 L 58 60 L 92 124 L 75 148 L 46 95 L 46 148 L 22 148 Z" fill="#ffffff"/>
+                    <path d="M 140 86 L 166 66 L 166 148 L 140 148 Z" fill="#ffffff"/>
+
+                    <!-- Swoosh melengkung dari bawah tengah M menyapu kaki kanan M menyatu ke bagian bawah paruh elang -->
+                    <path d="M 75 148 C 96 102, 136 62, 178 55 C 184 54, 188 57, 188 63 C 185 59, 178 59, 170 63 C 142 76, 118 108, 106 148 Z" fill="url(#mdcSwooshSplash)" stroke="#0c1224" stroke-width="1.6" stroke-linejoin="round"/>
+
+                    <!-- Garis Kepala Elang (mulai dari lekukan kiri atas M, melengkung di atas M, menukik jadi paruh di celah M-D) -->
+                    <path d="M 64 67 C 88 46, 120 35, 146 37 C 152 38, 156 41, 160 40 C 173 36, 187 40, 189 55 C 189 59, 189 62, 188 63" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Alis & Mata Elang -->
+                    <path d="M 126 46 Q 139 43, 151 45" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
+                    <path d="M 132 46 C 132 54, 144 54, 144 46" fill="none" stroke="#ffffff" stroke-width="1.9" stroke-linecap="round"/>
+                    <circle cx="138" cy="49" r="2.1" fill="#ffffff"/>
+                    <!-- Garis pangkal paruh -->
+                    <path d="M 160 42 C 158 46, 156 49, 154 51" fill="none" stroke="#ffffff" stroke-width="2.0" stroke-linecap="round"/>
+
+                    <!-- Huruf D (vektor presisi, tegak) -->
+                    <path fill-rule="evenodd" d="M 194 60 L 238 60 C 274 60, 296 77, 296 104 C 296 131, 274 148, 238 148 L 194 148 Z M 220 79 L 220 129 L 237 129 C 258 129, 269 120, 269 104 C 269 88, 258 79, 237 79 Z" fill="#ffffff"/>
+
+                    <!-- Huruf C (vektor presisi, tegak) -->
+                    <path d="M 396 65 C 383 60, 369 58, 355 58 C 324 58, 305 76, 305 104 C 305 132, 324 150, 355 150 C 370 150, 384 147, 396 142 L 395 121 C 383 127, 370 130, 357 130 C 339 130, 331 120, 331 104 C 331 88, 339 78, 357 78 C 370 78, 383 81, 395 87 Z" fill="#ffffff"/>
+
+                    <!-- Garis Pemisah Horizontal -->
+                    <line x1="22" y1="160" x2="398" y2="160" stroke="#ffffff" stroke-width="2" opacity="0.88"/>
+
+                    <!-- Teks MASA DEPAN CERAH -->
+                    <text x="210" y="184" text-anchor="middle" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="19.5" font-weight="800" letter-spacing="5.8">MASA DEPAN CERAH</text>
+
+                    <!-- Bar Persegi Panjang Horizontal Metalik & Teks KADIPATEN -->
+                    <rect x="22" y="194" width="376" height="27" rx="2" fill="url(#mdcBarSplash)"/>
+                    <text x="210" y="214" text-anchor="middle" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="19.5" font-weight="900" letter-spacing="8">KADIPATEN</text>
+                </svg>
+            </div>
+
+            <span class="eyebrow-pill">YOUTH CHRISTMAS CELEBRATION</span>
+            <h1 class="gold-title splash-title font-serif-title">SILENT NIGHT</h1>
+            <p class="splash-slogan font-serif-italic">Peaceful Mind</p>
+            <div class="splash-pill-date">21 Desember 2026 &bull; 15:00 WIB</div>
+
+            <!-- 3 Preview Karakter Pixel 2D Anonim -->
+            <div class="splash-chars-row" aria-hidden="true">
+                <div class="splash-char-item">
+                    <canvas id="splash-char-0" width="24" height="30" class="splash-char-canvas pixel-crisp"></canvas>
+                </div>
+                <div class="splash-char-item">
+                    <canvas id="splash-char-1" width="24" height="30" class="splash-char-canvas pixel-crisp"></canvas>
+                </div>
+                <div class="splash-char-item">
+                    <canvas id="splash-char-2" width="24" height="30" class="splash-char-canvas pixel-crisp"></canvas>
+                </div>
+            </div>
+
+            <button type="button" id="open-invite-btn" class="btn-gold-cta">Buka Undangan 🎄🎵</button>
+            <p class="splash-hint">Ketuk di mana saja untuk masuk</p>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         LAYER 1: CANVAS LATAR MALAM NATAL SEAMLESS (Z-INDEX 1)
+    ====================================================================== -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- =====================================================================
+         LAYER 2: KARTU UNDANGAN DARK MIDNIGHT-GOLD GLASSMORPHISM (Z-INDEX 10)
+    ====================================================================== -->
+    <main id="app-stage">
+        <article class="invite-shell" aria-label="Undangan Natal Remaja MDC Kadipaten">
+            <div id="card-scroll">
+
+                <!-- ============ SECTION 1: INFO ACARA ============ -->
+                <section id="info-acara" class="card-section">
+                    <div class="card-logo-wrap">
+                        <svg class="mdc-logo-svg card-logo-svg" viewBox="0 0 420 225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Keluarga MDC Masa Depan Cerah Kadipaten">
+                            <defs>
+                                <linearGradient id="mdcBarCard" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#9ca3af"/>
+                                    <stop offset="52%" stop-color="#d4d8df"/>
+                                    <stop offset="100%" stop-color="#ffffff"/>
+                                </linearGradient>
+                                <linearGradient id="mdcSwooshCard" x1="100%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#f8fafc"/>
+                                    <stop offset="55%" stop-color="#cbd5e1"/>
+                                    <stop offset="100%" stop-color="#94a3b8"/>
+                                </linearGradient>
+                            </defs>
+
+                            <!-- Teks KELUARGA tegak lurus tepat di atas huruf D dan C -->
+                            <text x="194" y="49" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="21.5" font-weight="800" letter-spacing="6.2">KELUARGA</text>
+
+                            <!-- Huruf M (vektor presisi: kaki kiri + diagonal kiri, dan kaki kanan terpotong rapi di bawah swoosh) -->
+                            <path d="M 22 60 L 58 60 L 92 124 L 75 148 L 46 95 L 46 148 L 22 148 Z" fill="#ffffff"/>
+                            <path d="M 140 86 L 166 66 L 166 148 L 140 148 Z" fill="#ffffff"/>
+
+                            <!-- Swoosh melengkung dari bawah tengah M menyapu kaki kanan M menyatu ke bagian bawah paruh elang -->
+                            <path d="M 75 148 C 96 102, 136 62, 178 55 C 184 54, 188 57, 188 63 C 185 59, 178 59, 170 63 C 142 76, 118 108, 106 148 Z" fill="url(#mdcSwooshCard)" stroke="#0c1224" stroke-width="1.6" stroke-linejoin="round"/>
+
+                            <!-- Garis Kepala Elang (mulai dari lekukan kiri atas M, melengkung di atas M, menukik jadi paruh di celah M-D) -->
+                            <path d="M 64 67 C 88 46, 120 35, 146 37 C 152 38, 156 41, 160 40 C 173 36, 187 40, 189 55 C 189 59, 189 62, 188 63" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <!-- Alis & Mata Elang -->
+                            <path d="M 126 46 Q 139 43, 151 45" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
+                            <path d="M 132 46 C 132 54, 144 54, 144 46" fill="none" stroke="#ffffff" stroke-width="1.9" stroke-linecap="round"/>
+                            <circle cx="138" cy="49" r="2.1" fill="#ffffff"/>
+                            <!-- Garis pangkal paruh -->
+                            <path d="M 160 42 C 158 46, 156 49, 154 51" fill="none" stroke="#ffffff" stroke-width="2.0" stroke-linecap="round"/>
+
+                            <!-- Huruf D (vektor presisi, tegak) -->
+                            <path fill-rule="evenodd" d="M 194 60 L 238 60 C 274 60, 296 77, 296 104 C 296 131, 274 148, 238 148 L 194 148 Z M 220 79 L 220 129 L 237 129 C 258 129, 269 120, 269 104 C 269 88, 258 79, 237 79 Z" fill="#ffffff"/>
+
+                            <!-- Huruf C (vektor presisi, tegak) -->
+                            <path d="M 396 65 C 383 60, 369 58, 355 58 C 324 58, 305 76, 305 104 C 305 132, 324 150, 355 150 C 370 150, 384 147, 396 142 L 395 121 C 383 127, 370 130, 357 130 C 339 130, 331 120, 331 104 C 331 88, 339 78, 357 78 C 370 78, 383 81, 395 87 Z" fill="#ffffff"/>
+
+                            <!-- Garis Pemisah Horizontal -->
+                            <line x1="22" y1="160" x2="398" y2="160" stroke="#ffffff" stroke-width="2" opacity="0.88"/>
+
+                            <!-- Teks MASA DEPAN CERAH -->
+                            <text x="210" y="184" text-anchor="middle" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="19.5" font-weight="800" letter-spacing="5.8">MASA DEPAN CERAH</text>
+
+                            <!-- Bar Persegi Panjang Horizontal Metalik & Teks KADIPATEN -->
+                            <rect x="22" y="194" width="376" height="27" rx="2" fill="url(#mdcBarCard)"/>
+                            <text x="210" y="214" text-anchor="middle" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="19.5" font-weight="900" letter-spacing="8">KADIPATEN</text>
+                        </svg>
+                    </div>
+
+                    <span class="eyebrow-pill">YOUTH CHRISTMAS CELEBRATION</span>
+                    <h1 class="gold-title card-title font-serif-title">SILENT NIGHT</h1>
+                    <p class="card-slogan font-serif-italic">Peaceful Mind</p>
+
+                    <div class="gold-divider" aria-hidden="true">
+                        <span class="gold-line-l"></span>
+                        <span class="gold-star">✦</span>
+                        <span class="gold-line-r"></span>
+                    </div>
+
+                    <!-- Detail Acara -->
+                    <div class="info-list">
+                        <div class="info-item">
+                            <div class="info-icon" aria-hidden="true">📅</div>
+                            <div class="info-text">
+                                <span class="info-label">Hari &amp; Tanggal</span>
+                                <p class="info-value">Senin, 21 Desember 2026</p>
+                            </div>
+                        </div>
+
+                        <div class="info-hr"></div>
+
+                        <div class="info-item">
+                            <div class="info-icon" aria-hidden="true">🕒</div>
+                            <div class="info-text">
+                                <span class="info-label">Waktu</span>
+                                <p class="info-value">15:00 WIB - Selesai</p>
+                            </div>
+                        </div>
+
+                        <div class="info-hr"></div>
+
+                        <div class="info-item">
+                            <div class="info-icon" aria-hidden="true">📍</div>
+                            <div class="info-text">
+                                <span class="info-label">Lokasi</span>
+                                <p class="info-value-loc">GKPB MDC Kadipaten &mdash; Jl. Ampera No.21, Kadipaten, Kec. Kadipaten, Kabupaten Majalengka, Jawa Barat 45452</p>
+                                <a href="https://www.google.com/maps/search/?api=1&query=GKPB+MDC+Kadipaten+Jl.+Ampera+No.21+Kadipaten+Majalengka&query_place_id=ChIJYyUNHQApby4RQz8tZv3cc5c"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="btn-maps">
+                                    🗺️ Buka di Google Maps
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Highlight Konsumsi, Souvenir & Ada Doorprize -->
+                    <div class="perks-card">
+                        <div class="perk-row">
+                            <span>🍱🎁 Dapat konsumsi dan souvenir</span>
+                        </div>
+                        <div class="perk-row">
+                            <span>🎉 Ada Doorprize</span>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-scroll-pill" id="btn-to-gift">
+                        <span>Scroll ke bawah untuk Info Tukar Kado</span>
+                        <span class="arrow-nudge">↓</span>
+                    </button>
+                </section>
+
+                <!-- Pemisah Tipis Elegan Antar Bagian -->
+                <div class="gold-divider gold-divider-wide" aria-hidden="true">
+                    <span class="gold-line-l"></span>
+                    <span class="gold-star">✦ ❄ ✦</span>
+                    <span class="gold-line-r"></span>
+                </div>
+
+                <!-- ============ SECTION 2: INFO TUKAR KADO NATAL ============ -->
+                <section id="tukar-kado" class="card-section">
+                    <h2 class="gift-heading font-serif-title">🎁 Tukar Kado Natal</h2>
+
+                    <p class="gift-intro">
+                        Nggak wajib kok, tapi bakal seru banget karena nanti ada sesi tukar kado! Kalau bisa, yuk bawa 1 kado kecil dengan ketentuan berikut:
+                    </p>
+
+                    <div class="gift-table-box">
+                        <table class="gift-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Ketentuan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="gift-num">1</td>
+                                    <td><span class="hl-gold">Minimal Rp 20.000</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="gift-num">2</td>
+                                    <td><span class="hl-rose">Bukan</span> makanan atau minuman</td>
+                                </tr>
+                                <tr>
+                                    <td class="gift-num">3</td>
+                                    <td><span class="hl-rose">Bukan</span> kotak bekal atau tumbler</td>
+                                </tr>
+                                <tr>
+                                    <td class="gift-num">4</td>
+                                    <td>Kado dibungkus <span class="hl-gold">kertas berwarna cokelat</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="gift-closing font-serif-italic">Kado Sederhana, Sukacita Maksimal ✨</p>
+
+                    <button type="button" class="btn-scroll-pill btn-scroll-pill-subtle" id="btn-to-top">
+                        <span>↑ Kembali ke Info Acara</span>
+                    </button>
+                </section>
+
+            </div>
+        </article>
+    </main>
+
+    <!-- =====================================================================
+         LAYER 3: CANVAS KARAKTER 2D PIXEL ART ANONIM + PARTIKEL (Z-INDEX 25)
+    ====================================================================== -->
+    <canvas id="char-canvas"></canvas>
+
+    <!-- =====================================================================
+         LAYER 4: TOMBOL MUSIK MINIMALIS (Z-INDEX 60)
+    ====================================================================== -->
+    <button id="music-btn" type="button" aria-label="Nyalakan atau matikan musik">🔊</button>
+
+    <!-- =====================================================================
+         JAVASCRIPT UTAMA (100% PURE VANILLA JS, ZERO EXTERNAL CDN)
+    ====================================================================== -->
+    <script>
+        (function () {
+            'use strict';
+
+            /* =================================================================
+               1. SPRITE 2D PIXEL ART ANONIM (24x30 PIXEL, CRISP & KONTRAS)
+            ================================================================= */
+            const PIXEL_W = 24;
+            const PIXEL_H = 30;
+            const SPRITE_KEYS = ['spriteA', 'spriteB', 'spriteC'];
+            const SPEECH_POOL = ['Merry Christmas!', 'Peace!', '21 Des!', 'Weee!', 'Boing!', 'Ho Ho Ho!', 'See you!'];
+
+            function buildPixelSprite(kind, pose) {
+                const c = document.createElement('canvas');
+                c.width = PIXEL_W;
+                c.height = PIXEL_H;
+                const ctx = c.getContext('2d');
+                ctx.imageSmoothingEnabled = false;
+
+                const px = function (x, y, w, h, col) {
+                    ctx.fillStyle = col;
+                    ctx.fillRect(x, y, w, h);
+                };
+
+                const OUT = '#101022';
+                const SKIN = '#FFE0C4';
+                const SKIN_SH = '#F3C09A';
+                const WHITE = '#FFFFFF';
+                const WHITE_SH = '#E2E8F0';
+
+                if (kind === 'spriteA') {
+                    // Tipe 1: rambut pirang spiky, senyum bergigi, topi Santa miring, syal hijau, jaket Santa merah-putih, cincin oranye-emas
+                    px(5, 4, 14, 11, OUT);
+                    px(4, 7, 16, 7, OUT);
+
+                    px(6, 1, 10, 4, OUT);
+                    px(14, 2, 6, 4, OUT);
+                    px(7, 2, 8, 2, '#DC2626');
+                    px(8, 1, 5, 1, '#EF4444');
+                    px(14, 3, 4, 2, '#B91C1C');
+                    px(17, 4, 3, 2, WHITE);
+                    px(18, 5, 2, 1, WHITE_SH);
+                    px(5, 4, 13, 2, WHITE);
+                    px(5, 5, 13, 1, WHITE_SH);
+
+                    px(4, 6, 16, 4, '#EAB308');
+                    px(3, 8, 3, 4, '#CA8A04');
+                    px(18, 8, 3, 4, '#CA8A04');
+                    px(2, 7, 2, 2, '#FACC15');
+                    px(20, 7, 2, 2, '#FACC15');
+                    px(3, 10, 2, 2, '#FACC15');
+                    px(19, 10, 2, 2, '#FACC15');
+
+                    px(6, 8, 12, 7, SKIN);
+                    px(7, 14, 10, 1, SKIN_SH);
+
+                    px(6, 6, 12, 2, '#FACC15');
+                    px(7, 6, 3, 1, '#FEF08A');
+                    px(13, 6, 3, 1, '#FEF08A');
+                    px(6, 8, 2, 3, '#FACC15');
+                    px(9, 8, 2, 2, '#FACC15');
+                    px(12, 8, 2, 3, '#EAB308');
+                    px(16, 8, 2, 3, '#FACC15');
+
+                    if (pose === 'idle') {
+                        px(8, 10, 2, 2, '#78350F');
+                        px(8, 10, 1, 1, '#F59E0B');
+                        px(14, 10, 2, 2, '#78350F');
+                        px(14, 10, 1, 1, '#F59E0B');
+                        px(8, 13, 8, 2, OUT);
+                        px(9, 13, 6, 2, WHITE);
+                        px(10, 14, 1, 1, '#94A3B8');
+                        px(13, 14, 1, 1, '#94A3B8');
+                    } else if (pose === 'grabbed') {
+                        px(7, 10, 3, 2, OUT);
+                        px(8, 10, 1, 1, WHITE);
+                        px(14, 10, 3, 2, OUT);
+                        px(15, 10, 1, 1, WHITE);
+                        px(8, 13, 8, 2, '#F43F5E');
+                        px(9, 13, 6, 1, WHITE);
+                    } else {
+                        px(8, 10, 2, 1, OUT);
+                        px(9, 11, 1, 1, OUT);
+                        px(14, 10, 2, 1, OUT);
+                        px(14, 11, 1, 1, OUT);
+                        px(8, 13, 8, 2, WHITE);
+                    }
+
+                    px(5, 15, 14, 10, OUT);
+                    px(6, 16, 12, 8, '#DC2626');
+                    px(6, 23, 12, 1, WHITE);
+                    px(9, 17, 6, 6, '#1E293B');
+                    px(8, 17, 1, 6, WHITE);
+                    px(15, 17, 1, 6, WHITE);
+
+                    px(6, 15, 12, 2, '#16A34A');
+                    px(7, 15, 10, 1, '#22C55E');
+                    px(15, 17, 2, 3, '#16A34A');
+                    px(15, 19, 2, 1, '#86EFAC');
+
+                    px(11, 18, 2, 1, '#94A3B8');
+                    px(10, 19, 4, 3, '#F97316');
+                    px(11, 19, 2, 1, '#FDE047');
+                    px(11, 20, 2, 1, '#1E293B');
+
+                    if (pose === 'grabbed' || pose === 'flung') {
+                        px(2, 12, 4, 6, OUT);
+                        px(3, 13, 2, 4, '#DC2626');
+                        px(3, 13, 2, 1, WHITE);
+                        px(3, 11, 2, 2, SKIN);
+                        px(18, 12, 4, 6, OUT);
+                        px(19, 13, 2, 4, '#DC2626');
+                        px(19, 13, 2, 1, WHITE);
+                        px(19, 11, 2, 2, SKIN);
+                    } else {
+                        px(3, 16, 3, 6, OUT);
+                        px(4, 17, 2, 4, '#DC2626');
+                        px(4, 20, 2, 1, WHITE);
+                        px(4, 21, 2, 2, SKIN);
+                        px(18, 16, 3, 6, OUT);
+                        px(18, 17, 2, 4, '#DC2626');
+                        px(18, 20, 2, 1, WHITE);
+                        px(18, 21, 2, 2, SKIN);
+                    }
+
+                    px(6, 24, 5, 5, OUT);
+                    px(13, 24, 5, 5, OUT);
+                    px(7, 25, 3, 2, '#1E293B');
+                    px(14, 25, 3, 2, '#1E293B');
+                    px(7, 27, 3, 2, '#0F172A');
+                    px(14, 27, 3, 2, '#0F172A');
+
+                } else if (kind === 'spriteB') {
+                    // Tipe 2: rambut ungu tua disanggul + poni, mata hijau zamrud cerah, topi Santa mini / holly, choker + pin perak, gaun Santa merah-putih
+                    px(8, 0, 8, 5, OUT);
+                    px(9, 1, 6, 4, '#4C1D95');
+                    px(10, 1, 4, 1, '#7C3AED');
+                    px(10, 2, 2, 1, '#A78BFA');
+
+                    px(14, 1, 6, 4, OUT);
+                    px(15, 2, 4, 2, '#DC2626');
+                    px(18, 1, 2, 2, WHITE);
+                    px(14, 4, 5, 1, WHITE);
+                    px(6, 3, 3, 2, '#22C55E');
+                    px(7, 4, 2, 1, '#EF4444');
+
+                    px(4, 5, 16, 10, OUT);
+                    px(5, 6, 14, 8, '#4C1D95');
+                    px(4, 11, 3, 4, '#3B0764');
+                    px(17, 11, 3, 4, '#3B0764');
+
+                    px(7, 8, 10, 7, SKIN);
+                    px(6, 9, 12, 5, SKIN);
+                    px(7, 14, 10, 1, SKIN_SH);
+
+                    px(6, 6, 12, 2, '#6D28D9');
+                    px(8, 6, 4, 1, '#A78BFA');
+                    px(6, 8, 3, 3, '#4C1D95');
+                    px(15, 8, 3, 3, '#4C1D95');
+                    px(11, 7, 2, 2, '#5B21B6');
+
+                    px(7, 12, 2, 1, '#F472B6');
+                    px(15, 12, 2, 1, '#F472B6');
+
+                    if (pose === 'idle') {
+                        px(8, 10, 2, 2, '#16A34A');
+                        px(8, 10, 1, 1, '#4ADE80');
+                        px(14, 10, 2, 2, '#16A34A');
+                        px(14, 10, 1, 1, '#4ADE80');
+                        px(11, 13, 2, 1, '#BE123C');
+                    } else if (pose === 'grabbed') {
+                        px(8, 10, 2, 2, '#15803D');
+                        px(8, 10, 1, 1, WHITE);
+                        px(14, 10, 2, 2, '#15803D');
+                        px(14, 10, 1, 1, WHITE);
+                        px(11, 13, 2, 2, '#F43F5E');
+                    } else {
+                        px(8, 10, 2, 1, '#14532D');
+                        px(9, 11, 1, 1, '#14532D');
+                        px(14, 10, 2, 1, '#14532D');
+                        px(14, 11, 1, 1, '#14532D');
+                        px(11, 13, 2, 1, '#F43F5E');
+                    }
+
+                    px(9, 15, 6, 2, SKIN);
+                    px(8, 15, 8, 1, '#0F172A');
+                    px(14, 15, 3, 3, OUT);
+                    px(15, 15, 2, 2, '#F1F5F9');
+                    px(15, 16, 1, 1, '#64748B');
+
+                    px(5, 17, 14, 8, OUT);
+                    px(4, 20, 16, 5, OUT);
+                    px(6, 17, 12, 4, '#E11D48');
+                    px(6, 17, 12, 1, WHITE);
+                    px(5, 21, 14, 3, '#BE123C');
+                    px(5, 24, 14, 1, WHITE);
+                    px(11, 18, 2, 6, WHITE);
+                    px(7, 20, 10, 1, '#0F172A');
+                    px(10, 19, 4, 2, '#0F172A');
+                    px(11, 20, 2, 1, '#FDE047');
+
+                    if (pose === 'grabbed' || pose === 'flung') {
+                        px(2, 13, 4, 5, OUT);
+                        px(3, 14, 2, 3, '#E11D48');
+                        px(3, 14, 2, 1, WHITE);
+                        px(3, 12, 2, 2, SKIN);
+                        px(18, 13, 4, 5, OUT);
+                        px(19, 14, 2, 3, '#E11D48');
+                        px(19, 14, 2, 1, WHITE);
+                        px(19, 12, 2, 2, SKIN);
+                    } else {
+                        px(3, 17, 3, 5, OUT);
+                        px(4, 18, 2, 3, '#E11D48');
+                        px(4, 20, 2, 1, WHITE);
+                        px(4, 21, 2, 2, SKIN);
+                        px(18, 17, 3, 5, OUT);
+                        px(18, 18, 2, 3, '#E11D48');
+                        px(18, 20, 2, 1, WHITE);
+                        px(18, 21, 2, 2, SKIN);
+                    }
+
+                    px(8, 25, 3, 4, OUT);
+                    px(13, 25, 3, 4, OUT);
+                    px(8, 25, 2, 2, SKIN);
+                    px(14, 25, 2, 2, SKIN);
+                    px(8, 27, 2, 2, '#0F172A');
+                    px(14, 27, 2, 2, '#0F172A');
+
+                } else {
+                    // Tipe 3: rambut merah-coral panjang berkepang, mata kuning bercincin, topi Santa berornamen bintang emas, mantel crimson + kemeja putih & dasi hitam
+                    px(4, 5, 16, 16, OUT);
+                    px(5, 6, 14, 14, '#EA580C');
+                    px(4, 9, 2, 11, '#C2410C');
+                    px(18, 9, 2, 11, '#C2410C');
+
+                    px(6, 1, 12, 4, OUT);
+                    px(7, 2, 10, 2, '#991B1B');
+                    px(9, 1, 6, 1, '#B91C1C');
+                    px(6, 4, 12, 2, WHITE);
+                    px(6, 5, 12, 1, WHITE_SH);
+                    px(16, 2, 3, 3, '#FDE047');
+                    px(17, 3, 1, 1, WHITE);
+
+                    px(7, 8, 10, 7, SKIN);
+                    px(6, 9, 12, 5, SKIN);
+                    px(7, 14, 10, 1, SKIN_SH);
+
+                    px(6, 6, 12, 2, '#F97316');
+                    px(8, 6, 4, 1, '#FDBA74');
+                    px(6, 8, 2, 4, '#EA580C');
+                    px(16, 8, 2, 4, '#EA580C');
+                    px(10, 7, 4, 2, '#F97316');
+
+                    if (pose === 'idle') {
+                        px(8, 10, 2, 2, '#FACC15');
+                        px(9, 10, 1, 1, '#FEF08A');
+                        px(8, 11, 1, 1, '#B91C1C');
+                        px(14, 10, 2, 2, '#FACC15');
+                        px(15, 10, 1, 1, '#FEF08A');
+                        px(14, 11, 1, 1, '#B91C1C');
+                        px(11, 13, 2, 1, '#9A3412');
+                    } else if (pose === 'grabbed') {
+                        px(8, 10, 2, 2, '#FEF08A');
+                        px(8, 11, 1, 1, '#991B1B');
+                        px(14, 10, 2, 2, '#FEF08A');
+                        px(14, 11, 1, 1, '#991B1B');
+                        px(11, 13, 2, 1, '#BE123C');
+                    } else {
+                        px(8, 10, 2, 2, '#FACC15');
+                        px(14, 10, 2, 2, '#FACC15');
+                        px(11, 13, 2, 1, '#9A3412');
+                    }
+
+                    px(5, 15, 14, 10, OUT);
+                    px(4, 20, 16, 5, OUT);
+                    px(6, 16, 12, 8, '#991B1B');
+                    px(5, 21, 14, 3, '#7F1D1D');
+                    px(5, 24, 14, 1, WHITE);
+
+                    px(6, 16, 3, 2, WHITE);
+                    px(15, 16, 3, 2, WHITE);
+                    px(9, 16, 6, 6, WHITE);
+                    px(11, 16, 2, 7, '#0F172A');
+                    px(10, 16, 4, 1, '#0F172A');
+
+                    px(5, 15, 3, 9, OUT);
+                    px(6, 15, 2, 8, '#F97316');
+                    px(6, 16, 1, 1, '#FDBA74');
+                    px(7, 18, 1, 1, '#C2410C');
+                    px(6, 20, 1, 1, '#FDBA74');
+                    px(6, 22, 2, 1, '#0F172A');
+
+                    if (pose === 'grabbed' || pose === 'flung') {
+                        px(2, 12, 4, 6, OUT);
+                        px(3, 13, 2, 4, '#991B1B');
+                        px(3, 13, 2, 1, WHITE);
+                        px(3, 11, 2, 2, SKIN);
+                        px(18, 12, 4, 6, OUT);
+                        px(19, 13, 2, 4, '#991B1B');
+                        px(19, 13, 2, 1, WHITE);
+                        px(19, 11, 2, 2, SKIN);
+                    } else {
+                        px(3, 16, 3, 6, OUT);
+                        px(4, 17, 2, 4, '#991B1B');
+                        px(4, 20, 2, 1, WHITE);
+                        px(4, 21, 2, 2, SKIN);
+                        px(18, 16, 3, 6, OUT);
+                        px(18, 17, 2, 4, '#991B1B');
+                        px(18, 20, 2, 1, WHITE);
+                        px(18, 21, 2, 2, SKIN);
+                    }
+
+                    px(7, 25, 4, 4, OUT);
+                    px(13, 25, 4, 4, OUT);
+                    px(8, 25, 2, 2, '#1E293B');
+                    px(14, 25, 2, 2, '#1E293B');
+                    px(8, 27, 2, 2, '#0F172A');
+                    px(14, 27, 2, 2, '#0F172A');
+                }
+
+                return c;
+            }
+
+            const SPRITES = SPRITE_KEYS.map(function (k) {
+                return {
+                    idle: buildPixelSprite(k, 'idle'),
+                    grabbed: buildPixelSprite(k, 'grabbed'),
+                    flung: buildPixelSprite(k, 'flung')
+                };
+            });
+
+            function drawSplashPreviews() {
+                for (let i = 0; i < 3; i++) {
+                    const el = document.getElementById('splash-char-' + i);
+                    if (!el) continue;
+                    const ctx = el.getContext('2d');
+                    ctx.imageSmoothingEnabled = false;
+                    ctx.clearRect(0, 0, PIXEL_W, PIXEL_H);
+                    ctx.drawImage(SPRITES[i].idle, 0, 0);
+                }
+            }
+
+            /* =================================================================
+               2. CANVAS LATAR MALAM NATAL SEAMLESS (ANTI KOTAK-KOTAK)
+            ================================================================= */
+            const bgCanvas = document.getElementById('bg-canvas');
+            const bgCtx = bgCanvas.getContext('2d');
+            const charCanvas = document.getElementById('char-canvas');
+            const charCtx = charCanvas.getContext('2d');
+
+            // Offscreen canvas untuk Bulan Sabit transparan sejati ('destination-out')
+            const moonCanvas = document.createElement('canvas');
+            const moonCtx = moonCanvas.getContext('2d');
+            let moonSize = 64;
+
+            let W = window.innerWidth;
+            let H = window.innerHeight;
+            let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+            let stars = [];
+            let flakes = [];
+            let pines = [];
+            let tSec = 0;
+            let tiltX = 0;
+            let tiltY = 0;
+
+            const FAIRY_LIGHTS = ['#FDE047', '#FDBA74', '#93C5FD', '#FCA5A5'];
+
+            // 6 orb aurora radial yang saling bertumpuk & pudar sempurna ke alpha 0
+            const AURORA_ORBS = [
+                { bx: 0.18, by: 0.20, rx: 0.14, ry: 0.06, fx: 0.18, fy: 0.14, ph: 0.2, rad: 0.54, rgb: '45, 212, 191', a: 0.14 },
+                { bx: 0.52, by: 0.16, rx: 0.16, ry: 0.07, fx: 0.14, fy: 0.19, ph: 1.5, rad: 0.58, rgb: '30, 144, 214', a: 0.13 },
+                { bx: 0.82, by: 0.25, rx: 0.13, ry: 0.08, fx: 0.16, fy: 0.13, ph: 2.9, rad: 0.54, rgb: '99, 102, 241', a: 0.14 },
+                { bx: 0.34, by: 0.34, rx: 0.15, ry: 0.07, fx: 0.12, fy: 0.17, ph: 4.1, rad: 0.56, rgb: '56, 189, 248', a: 0.12 },
+                { bx: 0.70, by: 0.38, rx: 0.14, ry: 0.06, fx: 0.15, fy: 0.12, ph: 5.2, rad: 0.52, rgb: '139, 92, 246', a: 0.12 },
+                { bx: 0.48, by: 0.46, rx: 0.18, ry: 0.05, fx: 0.11, fy: 0.15, ph: 3.6, rad: 0.60, rgb: '20, 184, 166', a: 0.10 }
+            ];
+
+            function buildMoonSprite() {
+                const mr = W < 440 ? 20 : 25;
+                moonSize = Math.ceil(mr * 2.6);
+                moonCanvas.width = moonSize * 2;
+                moonCanvas.height = moonSize * 2;
+                moonCtx.setTransform(2, 0, 0, 2, 0, 0);
+                moonCtx.clearRect(0, 0, moonSize, moonSize);
+
+                const cx = moonSize / 2;
+                const cy = moonSize / 2;
+
+                moonCtx.globalCompositeOperation = 'source-over';
+                const moonGrad = moonCtx.createRadialGradient(cx + mr * 0.25, cy + mr * 0.15, mr * 0.15, cx, cy, mr);
+                moonGrad.addColorStop(0, '#FFFBEB');
+                moonGrad.addColorStop(0.75, '#FEF3C7');
+                moonGrad.addColorStop(1, '#F5D68A');
+                moonCtx.fillStyle = moonGrad;
+                moonCtx.beginPath();
+                moonCtx.arc(cx, cy, mr, 0, Math.PI * 2);
+                moonCtx.fill();
+
+                moonCtx.globalCompositeOperation = 'destination-out';
+                moonCtx.beginPath();
+                moonCtx.arc(cx - mr * 0.42, cy - mr * 0.16, mr * 0.88, 0, Math.PI * 2);
+                moonCtx.fill();
+                moonCtx.globalCompositeOperation = 'source-over';
+            }
+
+            function resizeAll() {
+                W = window.innerWidth;
+                H = window.innerHeight;
+                dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+                [bgCanvas, charCanvas].forEach(function (c) {
+                    c.width = Math.floor(W * dpr);
+                    c.height = Math.floor(H * dpr);
+                    c.style.width = W + 'px';
+                    c.style.height = H + 'px';
+                });
+
+                bgCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                charCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                buildMoonSprite();
+                buildSkyElements();
+            }
+
+            function buildSkyElements() {
+                const starCount = Math.min(120, Math.floor((W * H) / 6800));
+                stars = [];
+                for (let i = 0; i < starCount; i++) {
+                    stars.push({
+                        x: Math.random() * W,
+                        y: Math.random() * (H * 0.74),
+                        r: 0.55 + Math.random() * 1.45,
+                        phase: Math.random() * Math.PI * 2,
+                        speed: 0.85 + Math.random() * 1.85
+                    });
+                }
+
+                const snowCount = Math.min(82, Math.max(40, Math.floor(W / 6.2)));
+                flakes = [];
+                for (let i = 0; i < snowCount; i++) {
+                    const layer = i % 3;
+                    flakes.push({
+                        x: Math.random() * W,
+                        y: Math.random() * H,
+                        r: layer === 2 ? 2.4 + Math.random() * 1.6 : (layer === 1 ? 1.5 + Math.random() * 1.1 : 0.9 + Math.random() * 0.7),
+                        vy: layer === 2 ? 0.78 + Math.random() * 0.65 : (layer === 1 ? 0.48 + Math.random() * 0.42 : 0.25 + Math.random() * 0.25),
+                        vx: (Math.random() - 0.5) * 0.26,
+                        wobble: Math.random() * Math.PI * 2,
+                        alpha: layer === 2 ? 0.68 + Math.random() * 0.26 : (layer === 1 ? 0.48 + Math.random() * 0.24 : 0.30 + Math.random() * 0.20),
+                        layer: layer
+                    });
+                }
+
+                pines = [];
+                const step = Math.max(40, Math.floor(W / 12));
+                for (let x = -22; x <= W + 36; x += step) {
+                    const front = Math.random() > 0.45;
+                    const h = front ? 64 + Math.random() * 54 : 88 + Math.random() * 68;
+                    const w = h * (0.46 + Math.random() * 0.16);
+                    const bulbs = [];
+                    if (front) {
+                        const count = 3 + Math.floor(Math.random() * 4);
+                        for (let b = 0; b < count; b++) {
+                            const fy = 0.26 + Math.random() * 0.58;
+                            const halfW = (w * 0.40) * fy;
+                            bulbs.push({
+                                dx: (Math.random() * 2 - 1) * halfW,
+                                dy: fy * h,
+                                ci: Math.floor(Math.random() * FAIRY_LIGHTS.length),
+                                ph: Math.random() * Math.PI * 2
+                            });
+                        }
+                    }
+                    pines.push({
+                        x: x + (Math.random() - 0.5) * 18,
+                        h: h,
+                        w: w,
+                        front: front,
+                        bulbs: bulbs
+                    });
+                }
+                pines.sort(function (a, b) { return Number(a.front) - Number(b.front); });
+            }
+
+            function renderBackground() {
+                // 1. Gradasi vertikal langit malam yang halus
+                const sky = bgCtx.createLinearGradient(0, 0, 0, H);
+                sky.addColorStop(0.0, '#050914');
+                sky.addColorStop(0.50, '#0b1530');
+                sky.addColorStop(1.0, '#122042');
+                bgCtx.fillStyle = sky;
+                bgCtx.fillRect(0, 0, W, H);
+
+                // 2. Aurora lembut menyatu mulus (radial gradient + screen blending, pudar ke alpha 0)
+                bgCtx.save();
+                bgCtx.globalCompositeOperation = 'screen';
+                const maxDim = Math.max(W, H);
+                for (let i = 0; i < AURORA_ORBS.length; i++) {
+                    const o = AURORA_ORBS[i];
+                    const cx = W * (o.bx + Math.sin(tSec * o.fx + o.ph) * o.rx);
+                    const cy = H * (o.by + Math.cos(tSec * o.fy + o.ph * 1.3) * o.ry);
+                    const r = maxDim * o.rad;
+                    const g = bgCtx.createRadialGradient(cx, cy, 0, cx, cy, r);
+                    g.addColorStop(0.0, 'rgba(' + o.rgb + ', ' + o.a + ')');
+                    g.addColorStop(0.45, 'rgba(' + o.rgb + ', ' + (o.a * 0.44).toFixed(3) + ')');
+                    g.addColorStop(0.78, 'rgba(' + o.rgb + ', ' + (o.a * 0.11).toFixed(3) + ')');
+                    g.addColorStop(1.0, 'rgba(' + o.rgb + ', 0)');
+                    bgCtx.fillStyle = g;
+                    bgCtx.beginPath();
+                    bgCtx.arc(cx, cy, r, 0, Math.PI * 2);
+                    bgCtx.fill();
+                }
+                bgCtx.restore();
+
+                // 3. Bintang berkelip lembut
+                for (let i = 0; i < stars.length; i++) {
+                    const s = stars[i];
+                    const a = 0.25 + 0.75 * (0.5 + 0.5 * Math.sin(tSec * s.speed + s.phase));
+                    bgCtx.fillStyle = 'rgba(255, 252, 240, ' + a.toFixed(2) + ')';
+                    bgCtx.beginPath();
+                    bgCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                    bgCtx.fill();
+                }
+
+                // 4. Bulan Sabit Transparan Sejati + Halo Hangat
+                const mx = W * 0.80;
+                const my = Math.max(66, H * 0.11);
+                const haloR = moonSize * 1.45;
+                const mg = bgCtx.createRadialGradient(mx, my, moonSize * 0.12, mx, my, haloR);
+                mg.addColorStop(0.0, 'rgba(245, 214, 138, 0.26)');
+                mg.addColorStop(0.45, 'rgba(245, 214, 138, 0.09)');
+                mg.addColorStop(1.0, 'rgba(245, 214, 138, 0)');
+                bgCtx.fillStyle = mg;
+                bgCtx.beginPath();
+                bgCtx.arc(mx, my, haloR, 0, Math.PI * 2);
+                bgCtx.fill();
+                bgCtx.drawImage(moonCanvas, mx - moonSize / 2, my - moonSize / 2, moonSize, moonSize);
+
+                // 5. Bintang Betlehem 4-Sinar di Kiri Atas
+                const sx = W * 0.16;
+                const sy = Math.max(68, H * 0.12);
+                const pulse = 1 + Math.sin(tSec * 2.2) * 0.14;
+                bgCtx.save();
+                bgCtx.translate(sx, sy);
+                const sg = bgCtx.createRadialGradient(0, 0, 1, 0, 0, 34 * pulse);
+                sg.addColorStop(0.0, 'rgba(255, 251, 235, 0.88)');
+                sg.addColorStop(0.32, 'rgba(245, 214, 138, 0.28)');
+                sg.addColorStop(1.0, 'rgba(245, 214, 138, 0)');
+                bgCtx.fillStyle = sg;
+                bgCtx.beginPath();
+                bgCtx.arc(0, 0, 34 * pulse, 0, Math.PI * 2);
+                bgCtx.fill();
+
+                bgCtx.fillStyle = '#FFFBEB';
+                const L = 14.5 * pulse;
+                const S = 2.4;
+                bgCtx.beginPath();
+                bgCtx.moveTo(0, -L);
+                bgCtx.lineTo(S, -S);
+                bgCtx.lineTo(L, 0);
+                bgCtx.lineTo(S, S);
+                bgCtx.lineTo(0, L);
+                bgCtx.lineTo(-S, S);
+                bgCtx.lineTo(-L, 0);
+                bgCtx.lineTo(-S, -S);
+                bgCtx.closePath();
+                bgCtx.fill();
+                bgCtx.restore();
+
+                // 6. Bukit Salju Landai + Siluet Hutan Pinus & Lampu Natal Hangat
+                const hillBaseY = H - 22;
+                bgCtx.fillStyle = '#09152c';
+                bgCtx.beginPath();
+                bgCtx.moveTo(0, H);
+                bgCtx.lineTo(0, hillBaseY - 18);
+                bgCtx.quadraticCurveTo(W * 0.28, hillBaseY - 46, W * 0.56, hillBaseY - 20);
+                bgCtx.quadraticCurveTo(W * 0.82, hillBaseY + 2, W, hillBaseY - 26);
+                bgCtx.lineTo(W, H);
+                bgCtx.closePath();
+                bgCtx.fill();
+
+                for (let i = 0; i < pines.length; i++) {
+                    const p = pines[i];
+                    const by = H - 8;
+                    bgCtx.fillStyle = p.front ? '#050c1b' : '#08142b';
+                    for (let tier = 0; tier < 3; tier++) {
+                        const ty = by - p.h + tier * (p.h * 0.24);
+                        const bty = by - p.h * (0.48 - tier * 0.24);
+                        const hw = (p.w * 0.5) * (0.55 + tier * 0.24);
+                        bgCtx.beginPath();
+                        bgCtx.moveTo(p.x, ty);
+                        bgCtx.lineTo(p.x - hw, bty);
+                        bgCtx.lineTo(p.x + hw, bty);
+                        bgCtx.closePath();
+                        bgCtx.fill();
+                    }
+
+                    if (p.front && p.bulbs.length) {
+                        for (let b = 0; b < p.bulbs.length; b++) {
+                            const lb = p.bulbs[b];
+                            const blink = 0.45 + 0.55 * (0.5 + 0.5 * Math.sin(tSec * 2.8 + lb.ph));
+                            const col = FAIRY_LIGHTS[lb.ci];
+                            bgCtx.save();
+                            bgCtx.globalAlpha = blink;
+                            bgCtx.fillStyle = col;
+                            bgCtx.shadowColor = col;
+                            bgCtx.shadowBlur = 8;
+                            bgCtx.beginPath();
+                            bgCtx.arc(p.x + lb.dx, by - p.h + lb.dy, 2.0, 0, Math.PI * 2);
+                            bgCtx.fill();
+                            bgCtx.restore();
+                        }
+                    }
+                }
+
+                const frontHillGrad = bgCtx.createLinearGradient(0, H - 38, 0, H);
+                frontHillGrad.addColorStop(0, 'rgba(203, 213, 225, 0.16)');
+                frontHillGrad.addColorStop(1, 'rgba(15, 23, 42, 0.65)');
+                bgCtx.fillStyle = frontHillGrad;
+                bgCtx.beginPath();
+                bgCtx.moveTo(0, H);
+                bgCtx.lineTo(0, H - 18);
+                bgCtx.quadraticCurveTo(W * 0.34, H - 36, W * 0.68, H - 14);
+                bgCtx.quadraticCurveTo(W * 0.88, H - 4, W, H - 20);
+                bgCtx.lineTo(W, H);
+                bgCtx.closePath();
+                bgCtx.fill();
+
+                // 7. Salju Parallax Berlapis
+                for (let i = 0; i < flakes.length; i++) {
+                    const f = flakes[i];
+                    f.wobble += 0.018;
+                    f.x += f.vx + Math.sin(f.wobble) * (0.22 + f.layer * 0.1) + tiltX * (0.8 + f.layer * 0.45);
+                    f.y += f.vy;
+                    if (f.y > H + 8) {
+                        f.y = -8;
+                        f.x = Math.random() * W;
+                    }
+                    if (f.x < -10) f.x = W + 10;
+                    if (f.x > W + 10) f.x = -10;
+
+                    if (f.layer === 2) {
+                        const fg = bgCtx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 2.1);
+                        fg.addColorStop(0, 'rgba(255, 255, 255, ' + f.alpha + ')');
+                        fg.addColorStop(0.55, 'rgba(226, 232, 240, ' + (f.alpha * 0.38).toFixed(2) + ')');
+                        fg.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                        bgCtx.fillStyle = fg;
+                        bgCtx.beginPath();
+                        bgCtx.arc(f.x, f.y, f.r * 2.1, 0, Math.PI * 2);
+                        bgCtx.fill();
+                    } else {
+                        bgCtx.fillStyle = 'rgba(255, 255, 255, ' + f.alpha + ')';
+                        bgCtx.beginPath();
+                        bgCtx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+                        bgCtx.fill();
+                    }
+                }
+            }
+
+            /* =================================================================
+               3. FISIKA 6 KARAKTER PIXEL 2D ANONIM + SPARKLES + BALON KATA
+            ================================================================= */
+            let chars = [];
+            let sparks = [];
+
+            function getSpriteScale() {
+                return W < 430 ? 2.35 : 2.75;
+            }
+
+            function spawnSparkles(x, y, count) {
+                const n = count || 8;
+                const palette = ['#F5D68A', '#FFFFFF', '#FDA4AF', '#93C5FD', '#86EFAC'];
+                for (let i = 0; i < n; i++) {
+                    const ang = Math.random() * Math.PI * 2;
+                    const spd = 1.4 + Math.random() * 4.0;
+                    sparks.push({
+                        x: x,
+                        y: y,
+                        vx: Math.cos(ang) * spd,
+                        vy: Math.sin(ang) * spd,
+                        size: Math.random() < 0.5 ? 3 : 5,
+                        color: palette[Math.floor(Math.random() * palette.length)],
+                        life: 24 + Math.floor(Math.random() * 18),
+                        maxLife: 42
+                    });
+                }
+            }
+
+            function drawSpeechBubble(ctx, x, y, text, alpha) {
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                ctx.font = 'bold 10px "Courier New", Courier, monospace';
+                const tw = ctx.measureText(text).width;
+                const boxW = tw + 16;
+                const boxH = 22;
+
+                let bx = Math.round(x - boxW / 2);
+                bx = Math.max(8, Math.min(W - boxW - 8, bx));
+                const by = Math.max(12, Math.round(y - boxH));
+
+                ctx.fillStyle = '#0F172A';
+                ctx.fillRect(bx - 2, by - 2, boxW + 4, boxH + 4);
+                ctx.fillStyle = '#FEFCE8';
+                ctx.fillRect(bx, by, boxW, boxH);
+
+                const tx = Math.max(bx + 6, Math.min(bx + boxW - 10, Math.round(x - 3)));
+                ctx.fillStyle = '#0F172A';
+                ctx.fillRect(tx - 1, by + boxH + 2, 8, 4);
+                ctx.fillStyle = '#FEFCE8';
+                ctx.fillRect(tx, by + boxH, 6, 4);
+
+                ctx.fillStyle = '#0F172A';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, bx + boxW / 2, by + boxH / 2 + 1);
+                ctx.restore();
+            }
+
+            class FloatingPixelChar {
+                constructor(variantIndex, x, y) {
+                    this.variantIndex = variantIndex % SPRITES.length;
+                    this.scale = getSpriteScale();
+                    this.radius = (PIXEL_W * this.scale) * 0.48;
+                    this.x = x;
+                    this.y = y;
+
+                    const ang = Math.random() * Math.PI * 2;
+                    const spd = 0.45 + Math.random() * 0.65;
+                    this.vx = Math.cos(ang) * spd;
+                    this.vy = Math.sin(ang) * spd;
+
+                    this.rot = (Math.random() - 0.5) * 0.16;
+                    this.vRot = (Math.random() - 0.5) * 0.008;
+                    this.bobPhase = Math.random() * Math.PI * 2;
+                    this.bobSpeed = 0.03 + Math.random() * 0.02;
+
+                    this.grabbed = false;
+                    this.flungTimer = 0;
+                    this.speech = '';
+                    this.speechTimer = 0;
+                }
+
+                sanitizeState() {
+                    const safeW = Number.isFinite(W) && W > 0 ? W : (window.innerWidth || 360);
+                    const safeH = Number.isFinite(H) && H > 0 ? H : (window.innerHeight || 640);
+                    if (!Number.isFinite(this.x)) this.x = safeW * 0.5;
+                    if (!Number.isFinite(this.y)) this.y = safeH * 0.5;
+                    if (!Number.isFinite(this.vx)) this.vx = (Math.random() - 0.5) * 0.8;
+                    if (!Number.isFinite(this.vy)) this.vy = (Math.random() - 0.5) * 0.8;
+                    if (!Number.isFinite(this.rot)) this.rot = 0;
+                    if (!Number.isFinite(this.vRot)) this.vRot = 0;
+                    if (!Number.isFinite(this.bobPhase)) this.bobPhase = 0;
+                }
+
+                clampToBounds() {
+                    const safeW = Number.isFinite(W) && W > 0 ? W : (window.innerWidth || 360);
+                    const safeH = Number.isFinite(H) && H > 0 ? H : (window.innerHeight || 640);
+                    const padX = Math.min(this.radius + 6, safeW * 0.45);
+                    const padY = Math.min(this.radius + 8, safeH * 0.45);
+                    const minX = Math.min(padX, safeW * 0.5);
+                    const maxX = Math.max(safeW - padX, safeW * 0.5);
+                    const minY = Math.min(padY, safeH * 0.5);
+                    const maxY = Math.max(safeH - padY, safeH * 0.5);
+                    this.x = Math.max(minX, Math.min(maxX, this.x));
+                    this.y = Math.max(minY, Math.min(maxY, this.y));
+                }
+
+                say(dur) {
+                    this.speech = SPEECH_POOL[Math.floor(Math.random() * SPEECH_POOL.length)];
+                    this.speechTimer = dur || 85;
+                }
+
+                update() {
+                    this.scale = getSpriteScale();
+                    this.radius = (PIXEL_W * this.scale) * 0.48;
+                    this.sanitizeState();
+                    this.bobPhase += this.bobSpeed;
+
+                    if (this.speechTimer > 0) this.speechTimer--;
+                    if (this.flungTimer > 0) this.flungTimer--;
+
+                    if (this.grabbed) {
+                        this.rot *= 0.85;
+                        this.vRot = 0;
+                        this.clampToBounds();
+                        return;
+                    }
+
+                    const safeTiltX = Number.isFinite(tiltX) ? tiltX : 0;
+                    const safeTiltY = Number.isFinite(tiltY) ? tiltY : 0;
+                    this.vx += safeTiltX * 0.14;
+                    this.vy += safeTiltY * 0.14;
+
+                    let spd = Math.hypot(this.vx, this.vy);
+                    if (!Number.isFinite(spd)) {
+                        this.vx = (Math.random() - 0.5) * 0.8;
+                        this.vy = (Math.random() - 0.5) * 0.8;
+                        spd = Math.hypot(this.vx, this.vy);
+                    }
+
+                    if (spd > 1.45) {
+                        this.vx *= 0.986;
+                        this.vy *= 0.986;
+                    } else if (spd < 0.35) {
+                        const da = this.bobPhase * 0.7;
+                        this.vx += Math.cos(da) * 0.02;
+                        this.vy += Math.sin(da) * 0.02;
+                    }
+
+                    if (spd > 24) {
+                        this.vx = (this.vx / spd) * 24;
+                        this.vy = (this.vy / spd) * 24;
+                    }
+
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    this.rot += this.vRot;
+                    this.vRot *= 0.97;
+                    if (Math.abs(this.vRot) < 0.002) this.rot *= 0.96;
+
+                    this.sanitizeState();
+
+                    const padX = Math.min(this.radius + 6, W * 0.45);
+                    const padY = Math.min(this.radius + 8, H * 0.45);
+                    const minX = Math.min(padX, W * 0.5);
+                    const maxX = Math.max(W - padX, W * 0.5);
+                    const minY = Math.min(padY, H * 0.5);
+                    const maxY = Math.max(H - padY, H * 0.5);
+                    const bounce = 0.85;
+                    let hitWall = false;
+                    let bx = this.x, by = this.y;
+
+                    if (this.x < minX) {
+                        this.x = minX;
+                        this.vx = Math.abs(this.vx) * bounce;
+                        hitWall = true;
+                        bx = 6;
+                    } else if (this.x > maxX) {
+                        this.x = maxX;
+                        this.vx = -Math.abs(this.vx) * bounce;
+                        hitWall = true;
+                        bx = W - 6;
+                    }
+
+                    if (this.y < minY) {
+                        this.y = minY;
+                        this.vy = Math.abs(this.vy) * bounce;
+                        hitWall = true;
+                        by = 6;
+                    } else if (this.y > maxY) {
+                        this.y = maxY;
+                        this.vy = -Math.abs(this.vy) * bounce;
+                        hitWall = true;
+                        by = H - 6;
+                    }
+
+                    this.clampToBounds();
+
+                    if (hitWall && spd > 3.2) {
+                        this.vRot = (Math.random() - 0.5) * 0.18;
+                        this.flungTimer = Math.max(this.flungTimer, 24);
+                        spawnSparkles(bx, by, Math.min(10, Math.floor(spd * 0.9)));
+                        if (Math.random() < 0.72) this.say(80);
+                        playBounceChime();
+                    }
+                }
+
+                draw(ctx) {
+                    this.sanitizeState();
+                    const set = SPRITES[this.variantIndex];
+                    if (!set) return;
+
+                    let img = set.idle;
+                    if (this.grabbed) img = set.grabbed;
+                    else if (this.flungTimer > 0 || Math.hypot(this.vx, this.vy) > 5.5) img = set.flung;
+
+                    const dw = Math.round(PIXEL_W * this.scale);
+                    const dh = Math.round(PIXEL_H * this.scale);
+                    const bob = this.grabbed ? 0 : Math.sin(this.bobPhase) * 3.5;
+                    const drawX = Math.round(this.x);
+                    const drawY = Math.round(this.y + bob);
+
+                    if (!Number.isFinite(drawX) || !Number.isFinite(drawY) || !Number.isFinite(dw) || !Number.isFinite(dh) || dw <= 0 || dh <= 0) {
+                        return;
+                    }
+
+                    ctx.save();
+                    try {
+                        ctx.translate(drawX, drawY);
+
+                        const glow = ctx.createRadialGradient(0, 0, 4, 0, 0, dw * 0.7);
+                        glow.addColorStop(0, this.grabbed ? 'rgba(245, 214, 138, 0.34)' : 'rgba(255, 255, 255, 0.10)');
+                        glow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                        ctx.fillStyle = glow;
+                        ctx.beginPath();
+                        ctx.arc(0, 0, dw * 0.7, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        ctx.rotate(Number.isFinite(this.rot) ? this.rot : 0);
+                        if (this.grabbed) ctx.scale(1.12, 1.12);
+
+                        ctx.imageSmoothingEnabled = false;
+                        ctx.drawImage(img, -dw / 2, -dh / 2, dw, dh);
+                    } finally {
+                        ctx.restore();
+                    }
+
+                    if (this.speechTimer > 0 && this.speech) {
+                        drawSpeechBubble(ctx, drawX, drawY - dh * 0.56, this.speech, Math.min(1, this.speechTimer / 18));
+                    }
+                }
+            }
+
+            function spawnInitialCharacters() {
+                chars = [];
+                const order = [0, 1, 2, 0, 1, 2];
+                for (let i = 0; i < order.length; i++) {
+                    const ang = (i / order.length) * Math.PI * 2 + 0.35;
+                    const rx = Math.min(W * 0.41, 210);
+                    const ry = Math.min(H * 0.38, 250);
+                    const cx = Math.max(40, Math.min(W - 40, W * 0.5 + Math.cos(ang) * rx));
+                    const cy = Math.max(60, Math.min(H - 60, H * 0.5 + Math.sin(ang) * ry));
+                    chars.push(new FloatingPixelChar(order[i], cx, cy));
+                }
+            }
+
+            function resolveCollisions() {
+                for (let i = 0; i < chars.length; i++) {
+                    for (let j = i + 1; j < chars.length; j++) {
+                        const a = chars[i];
+                        const b = chars[j];
+                        a.sanitizeState();
+                        b.sanitizeState();
+
+                        const dx = b.x - a.x;
+                        const dy = b.y - a.y;
+                        const dist = Math.hypot(dx, dy);
+                        const minD = (a.radius + b.radius) * 0.86;
+
+                        if (Number.isFinite(dist) && dist > 0.01 && dist < minD) {
+                            const nx = dx / dist;
+                            const ny = dy / dist;
+                            const overlap = minD - dist;
+
+                            if (!a.grabbed && !b.grabbed) {
+                                a.x -= nx * overlap * 0.5;
+                                a.y -= ny * overlap * 0.5;
+                                b.x += nx * overlap * 0.5;
+                                b.y += ny * overlap * 0.5;
+                            } else if (a.grabbed) {
+                                b.x += nx * overlap;
+                                b.y += ny * overlap;
+                            } else {
+                                a.x -= nx * overlap;
+                                a.y -= ny * overlap;
+                            }
+
+                            const rvx = b.vx - a.vx;
+                            const rvy = b.vy - a.vy;
+                            const vn = rvx * nx + rvy * ny;
+                            if (Number.isFinite(vn) && vn < 0) {
+                                const imp = -(1 + 0.85) * vn * 0.5;
+                                if (!a.grabbed) {
+                                    a.vx -= imp * nx;
+                                    a.vy -= imp * ny;
+                                }
+                                if (!b.grabbed) {
+                                    b.vx += imp * nx;
+                                    b.vy += imp * ny;
+                                }
+                                if (Math.abs(vn) > 3.2) {
+                                    spawnSparkles((a.x + b.x) * 0.5, (a.y + b.y) * 0.5, 6);
+                                    if (Math.random() < 0.55) a.say(72);
+                                    playBounceChime();
+                                }
+                            }
+
+                            a.sanitizeState();
+                            b.sanitizeState();
+                            a.clampToBounds();
+                            b.clampToBounds();
+                        }
+                    }
+                }
+            }
+
+            function renderSparks(ctx) {
+                for (let i = sparks.length - 1; i >= 0; i--) {
+                    const p = sparks[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vx *= 0.94;
+                    p.vy *= 0.94;
+                    p.life--;
+                    if (p.life <= 0) {
+                        sparks.splice(i, 1);
+                        continue;
+                    }
+                    ctx.save();
+                    ctx.globalAlpha = Math.max(0, p.life / p.maxLife);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(Math.round(p.x - p.size / 2), Math.round(p.y - p.size / 2), p.size, p.size);
+                    ctx.restore();
+                }
+            }
+
+            /* =================================================================
+               4. SMART TOUCH & MOUSE DRAG-AND-THROW (ANTI-BENTROK SCROLL & LINK)
+            ================================================================= */
+            let splashDismissed = false;
+            let dragged = null;
+            let dragTouchId = null;
+            let offX = 0;
+            let offY = 0;
+            let trail = [];
+
+            function hitTestChar(x, y) {
+                for (let i = chars.length - 1; i >= 0; i--) {
+                    const c = chars[i];
+                    if (Math.hypot(x - c.x, y - c.y) <= c.radius * 1.28) {
+                        return { char: c, idx: i };
+                    }
+                }
+                return null;
+            }
+
+            function beginGrab(hit, x, y) {
+                const c = hit.char;
+                dragged = c;
+                c.grabbed = true;
+                c.vx = 0;
+                c.vy = 0;
+                offX = c.x - x;
+                offY = c.y - y;
+                trail = [{ x: x, y: y, t: performance.now() }];
+
+                chars.splice(hit.idx, 1);
+                chars.push(c);
+
+                c.say(85);
+                spawnSparkles(c.x, c.y, 7);
+            }
+
+            function moveGrab(x, y) {
+                if (!dragged) return;
+                dragged.x = Math.max(24, Math.min(W - 24, x + offX));
+                dragged.y = Math.max(24, Math.min(H - 24, y + offY));
+                trail.push({ x: x, y: y, t: performance.now() });
+                while (trail.length > 6) trail.shift();
+            }
+
+            function endGrab() {
+                if (!dragged) return;
+
+                let vx = 0;
+                let vy = 0;
+
+                if (Array.isArray(trail) && trail.length >= 2) {
+                    const now = performance.now();
+                    let ref = trail[0];
+                    for (let i = trail.length - 1; i >= 0; i--) {
+                        if (now - trail[i].t >= 45) {
+                            ref = trail[i];
+                            break;
+                        }
+                    }
+                    const last = trail[trail.length - 1] || ref;
+                    const dt = Math.max(16, (last && ref && Number.isFinite(last.t - ref.t)) ? (last.t - ref.t) : 16);
+                    const scale = 16.5 / dt;
+
+                    const rawVx = (last.x - ref.x) * scale * 1.25;
+                    const rawVy = (last.y - ref.y) * scale * 1.25;
+                    if (Number.isFinite(rawVx) && Number.isFinite(rawVy)) {
+                        vx = rawVx;
+                        vy = rawVy;
+                    }
+                }
+
+                let spd = Math.hypot(vx, vy);
+                if (!Number.isFinite(spd)) {
+                    vx = 0;
+                    vy = 0;
+                    spd = 0;
+                } else if (spd > 23) {
+                    vx = (vx / spd) * 23;
+                    vy = (vy / spd) * 23;
+                    spd = 23;
+                }
+
+                dragged.grabbed = false;
+                dragged.vx = Number.isFinite(vx) ? vx : 0;
+                dragged.vy = Number.isFinite(vy) ? vy : 0;
+                dragged.vRot = Number.isFinite(vx * 0.015) ? vx * 0.015 : 0;
+                dragged.sanitizeState();
+                dragged.clampToBounds();
+
+                if (spd > 4.2) {
+                    dragged.flungTimer = 42;
+                    dragged.say(85);
+                    spawnSparkles(dragged.x, dragged.y, 9);
+                }
+
+                dragged = null;
+                dragTouchId = null;
+                trail = [];
+            }
+
+            window.addEventListener('blur', function () {
+                if (dragged) {
+                    dragged.grabbed = false;
+                    dragged.vx = 0;
+                    dragged.vy = 0;
+                    dragged.vRot = 0;
+                    dragged.sanitizeState();
+                    dragged.clampToBounds();
+                }
+                dragged = null;
+                dragTouchId = null;
+                trail = [];
+            });
+
+            window.addEventListener('touchstart', function (e) {
+                if (!splashDismissed || !e.changedTouches || !e.changedTouches.length) return;
+                if (e.target && e.target.closest && e.target.closest('#music-btn, button, a')) return;
+                const t = e.changedTouches[0];
+                const hit = hitTestChar(t.clientX, t.clientY);
+                if (hit) {
+                    dragTouchId = t.identifier;
+                    beginGrab(hit, t.clientX, t.clientY);
+                    e.preventDefault();
+                }
+            }, { passive: false });
+
+            window.addEventListener('touchmove', function (e) {
+                if (!dragged || dragTouchId === null) return;
+                for (let i = 0; i < e.changedTouches.length; i++) {
+                    const t = e.changedTouches[i];
+                    if (t.identifier === dragTouchId) {
+                        moveGrab(t.clientX, t.clientY);
+                        e.preventDefault();
+                        break;
+                    }
+                }
+            }, { passive: false });
+
+            window.addEventListener('touchend', function (e) {
+                if (!dragged || dragTouchId === null) return;
+                for (let i = 0; i < e.changedTouches.length; i++) {
+                    if (e.changedTouches[i].identifier === dragTouchId) {
+                        endGrab();
+                        break;
+                    }
+                }
+            }, { passive: true });
+
+            window.addEventListener('touchcancel', function () {
+                if (dragged) endGrab();
+            }, { passive: true });
+
+            window.addEventListener('mousedown', function (e) {
+                if (!splashDismissed || e.button !== 0) return;
+                if (e.target && e.target.closest && e.target.closest('#music-btn, button, a')) return;
+                const hit = hitTestChar(e.clientX, e.clientY);
+                if (hit) {
+                    beginGrab(hit, e.clientX, e.clientY);
+                    e.preventDefault();
+                }
+            });
+
+            window.addEventListener('mousemove', function (e) {
+                if (!dragged || dragTouchId !== null) return;
+                moveGrab(e.clientX, e.clientY);
+            });
+
+            window.addEventListener('mouseup', function () {
+                if (dragged && dragTouchId === null) endGrab();
+            });
+
+            /* =================================================================
+               5. SENSOR GOYANG & KEMIRINGAN HP (AKTIF OTOMATIS SENYAP)
+            ================================================================= */
+            let sensorsOn = false;
+            let lastShake = 0;
+
+            function shakeCharacters(strength) {
+                const f = strength || 14;
+                for (let i = 0; i < chars.length; i++) {
+                    const c = chars[i];
+                    if (c.grabbed) continue;
+                    const ang = Math.random() * Math.PI * 2;
+                    const mag = f * (0.65 + Math.random() * 0.65);
+                    c.vx += Math.cos(ang) * mag;
+                    c.vy += Math.sin(ang) * mag;
+                    c.vRot = (Math.random() - 0.5) * 0.24;
+                    c.flungTimer = 38;
+                    if (Math.random() < 0.7) c.say(85);
+                    spawnSparkles(c.x, c.y, 5);
+                }
+                playBounceChime();
+            }
+
+            function onMotion(e) {
+                if (!sensorsOn) return;
+                const acc = e.accelerationIncludingGravity || e.acceleration;
+                if (!acc) return;
+                const m = Math.hypot(acc.x || 0, acc.y || 0, acc.z || 0);
+                const now = performance.now();
+                if (m > 19.5 && now - lastShake > 550) {
+                    lastShake = now;
+                    shakeCharacters(15);
+                }
+            }
+
+            function onOrientation(e) {
+                if (!sensorsOn) return;
+                const g = Math.max(-45, Math.min(45, e.gamma || 0));
+                const b = Math.max(-45, Math.min(45, (e.beta || 45) - 45));
+                tiltX = g / 35;
+                tiltY = b / 35;
+            }
+
+            function activateSensorsSilently() {
+                if (sensorsOn) return;
+                try {
+                    if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+                        DeviceMotionEvent.requestPermission().then(function (res) {
+                            if (res === 'granted') {
+                                sensorsOn = true;
+                                window.addEventListener('devicemotion', onMotion);
+                                window.addEventListener('deviceorientation', onOrientation);
+                            }
+                        }).catch(function () {});
+                    } else {
+                        sensorsOn = true;
+                        window.addEventListener('devicemotion', onMotion);
+                        window.addEventListener('deviceorientation', onOrientation);
+                    }
+                } catch (_) {}
+            }
+
+            /* =================================================================
+               6. WEB AUDIO API SYNTH (JAZZ-FUNK-GOSPEL: DARI PULAU DAN BENUA)
+            ================================================================= */
+            let audioCtx = null;
+            let musicOn = false;
+            let loopRunning = false;
+            let stepTimer = null;
+            let stepIdx = 0;
+
+            const N = {
+                C3: 130.81, D3: 146.83, E3: 164.81, F3: 174.61, G3: 196.00, A3: 220.00, Bb3: 233.08,
+                C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23, G4: 392.00, A4: 440.00, Bb4: 466.16,
+                C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46
+            };
+
+            const SEQ = [
+                { m: N.A4, b: N.F3, ch: [N.F4, N.A4, N.C5, N.E5] }, null,
+                { m: N.A4 }, null,
+                { m: N.A4, b: N.C3 }, null,
+                { m: N.C5, b: N.F3, ch: [N.F4, N.A4, N.C5] }, null,
+                { m: N.C5, b: N.F3, ch: [N.F4, N.A4, N.C5] }, null,
+                null, { m: N.Bb4, b: N.G3 },
+                { m: N.A4, b: N.A3, ch: [N.F4, N.A4, N.C5] }, null,
+                null, { b: N.C3 },
+
+                { m: N.A4, b: N.D3, ch: [N.F4, N.A4, N.D5] }, null,
+                { m: N.G4 }, null,
+                { m: N.A4, b: N.G3, ch: [N.G4, N.Bb4, N.D5] }, null,
+                { m: N.C5 }, null,
+                { m: N.A4, b: N.C3, ch: [N.E4, N.G4, N.Bb4, N.C5] }, null,
+                null, { m: N.G4, b: N.C3 },
+                { m: N.F4, b: N.F3, ch: [N.F4, N.A4, N.C5] }, null,
+                null, { b: N.C3 },
+
+                { m: N.C5, b: N.F3, ch: [N.F4, N.A4, N.C5, N.E5] }, null,
+                null, { b: N.F3 },
+                { m: N.D5, b: N.D3 }, { m: N.C5 },
+                { m: N.Bb4, b: N.C3 }, { m: N.A4 },
+                { m: N.Bb4, b: N.Bb3, ch: [N.F4, N.Bb4, N.D5] }, null,
+                null, { b: N.Bb3 },
+                { m: N.C5, b: N.G3 }, { m: N.Bb4 },
+                { m: N.A4, b: N.C3 }, { m: N.G4 },
+
+                { m: N.A4, b: N.A3, ch: [N.F4, N.A4, N.C5] }, null,
+                null, { b: N.D3 },
+                { m: N.Bb4, b: N.G3 }, { m: N.A4 },
+                { m: N.G4, b: N.C3 }, { m: N.F4 },
+                { m: N.G4, b: N.C3, ch: [N.E4, N.G4, N.Bb4, N.C5] }, null,
+                null, { m: N.C4, b: N.G3 },
+                { m: N.C4, b: N.C3 }, null,
+                null, { b: N.C3 },
+
+                { m: N.F4, b: N.F3, ch: [N.F4, N.A4, N.C5] }, null,
+                { m: N.G4, b: N.G3 }, null,
+                { m: N.A4, b: N.A3, ch: [N.F4, N.A4, N.C5] }, null,
+                { m: N.Bb4, b: N.Bb3, ch: [N.F4, N.Bb4, N.D5] }, null,
+                { m: N.A4, b: N.C3, ch: [N.F4, N.A4, N.C5] }, null,
+                null, { b: N.C3 },
+                { m: N.G4, b: N.C3, ch: [N.E4, N.G4, N.Bb4, N.C5] }, null,
+                null, { b: N.C3 },
+                { m: N.F4, b: N.F3, ch: [N.F4, N.A4, N.C5, N.E5] }, null,
+                null, { b: N.C3 },
+                { b: N.F3 }, null,
+                { b: N.C3 }, null
+            ];
+
+            function unlockAudio() {
+                const AC = window.AudioContext || window.webkitAudioContext;
+                if (!AC) return Promise.resolve();
+                if (!audioCtx) audioCtx = new AC();
+                try {
+                    const buf = audioCtx.createBuffer(1, 1, 22050);
+                    const src = audioCtx.createBufferSource();
+                    src.buffer = buf;
+                    src.connect(audioCtx.destination);
+                    src.start(0);
+                } catch (_) {}
+                if (audioCtx.state === 'suspended') return audioCtx.resume();
+                return Promise.resolve();
+            }
+
+            function playLead(freq, time, dur) {
+                try {
+                    if (!audioCtx || !Number.isFinite(freq) || freq <= 0 || !Number.isFinite(time) || !Number.isFinite(dur) || dur <= 0) return;
+                    const o1 = audioCtx.createOscillator();
+                    const o2 = audioCtx.createOscillator();
+                    const f = audioCtx.createBiquadFilter();
+                    const g = audioCtx.createGain();
+                    o1.type = 'sawtooth';
+                    o1.frequency.setValueAtTime(freq, time);
+                    o2.type = 'triangle';
+                    o2.frequency.setValueAtTime(freq * 2, time);
+                    f.type = 'lowpass';
+                    f.frequency.setValueAtTime(1900, time);
+                    f.frequency.exponentialRampToValueAtTime(800, time + dur);
+                    g.gain.setValueAtTime(0.0001, time);
+                    g.gain.linearRampToValueAtTime(0.055, time + 0.018);
+                    g.gain.exponentialRampToValueAtTime(0.0001, time + dur);
+                    o1.connect(f);
+                    o2.connect(f);
+                    f.connect(g);
+                    g.connect(audioCtx.destination);
+                    o1.start(time);
+                    o2.start(time);
+                    o1.stop(time + dur + 0.03);
+                    o2.stop(time + dur + 0.03);
+                } catch (_) {}
+            }
+
+            function playBass(freq, time) {
+                try {
+                    if (!audioCtx || !Number.isFinite(freq) || freq <= 0 || !Number.isFinite(time)) return;
+                    const o = audioCtx.createOscillator();
+                    const f = audioCtx.createBiquadFilter();
+                    const g = audioCtx.createGain();
+                    o.type = 'triangle';
+                    o.frequency.setValueAtTime(freq, time);
+                    f.type = 'lowpass';
+                    f.frequency.setValueAtTime(520, time);
+                    g.gain.setValueAtTime(0.0001, time);
+                    g.gain.linearRampToValueAtTime(0.095, time + 0.01);
+                    g.gain.exponentialRampToValueAtTime(0.0001, time + 0.22);
+                    o.connect(f);
+                    f.connect(g);
+                    g.connect(audioCtx.destination);
+                    o.start(time);
+                    o.stop(time + 0.24);
+                } catch (_) {}
+            }
+
+            function playChords(notes, time) {
+                try {
+                    if (!audioCtx || !Array.isArray(notes) || !Number.isFinite(time)) return;
+                    for (let i = 0; i < notes.length; i++) {
+                        if (!Number.isFinite(notes[i]) || notes[i] <= 0) continue;
+                        const o = audioCtx.createOscillator();
+                        const g = audioCtx.createGain();
+                        o.type = 'sine';
+                        o.frequency.setValueAtTime(notes[i], time);
+                        g.gain.setValueAtTime(0.0001, time);
+                        g.gain.linearRampToValueAtTime(0.022, time + 0.014);
+                        g.gain.exponentialRampToValueAtTime(0.0001, time + 0.35);
+                        o.connect(g);
+                        g.connect(audioCtx.destination);
+                        o.start(time);
+                        o.stop(time + 0.37);
+                    }
+                } catch (_) {}
+            }
+
+            function playGroove(step, time) {
+                try {
+                    if (!audioCtx || !Number.isFinite(time)) return;
+                    if (step % 4 === 0) {
+                        const o = audioCtx.createOscillator();
+                        const g = audioCtx.createGain();
+                        o.type = 'sine';
+                        o.frequency.setValueAtTime(124, time);
+                        o.frequency.exponentialRampToValueAtTime(42, time + 0.11);
+                        g.gain.setValueAtTime(0.09, time);
+                        g.gain.exponentialRampToValueAtTime(0.0001, time + 0.12);
+                        o.connect(g);
+                        g.connect(audioCtx.destination);
+                        o.start(time);
+                        o.stop(time + 0.14);
+                    }
+                    if (step % 4 === 2) {
+                        const sz = Math.max(1, Math.floor(audioCtx.sampleRate * 0.055));
+                        const buf = audioCtx.createBuffer(1, sz, audioCtx.sampleRate);
+                        const data = buf.getChannelData(0);
+                        for (let i = 0; i < sz; i++) {
+                            data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (sz * 0.35));
+                        }
+                        const src = audioCtx.createBufferSource();
+                        src.buffer = buf;
+                        const hp = audioCtx.createBiquadFilter();
+                        hp.type = 'highpass';
+                        hp.frequency.setValueAtTime(1350, time);
+                        const g = audioCtx.createGain();
+                        g.gain.setValueAtTime(0.034, time);
+                        g.gain.exponentialRampToValueAtTime(0.0001, time + 0.055);
+                        src.connect(hp);
+                        hp.connect(g);
+                        g.connect(audioCtx.destination);
+                        src.start(time);
+                    }
+                    if (step % 2 === 1) {
+                        const o = audioCtx.createOscillator();
+                        const g = audioCtx.createGain();
+                        o.type = 'sine';
+                        o.frequency.setValueAtTime(3400 + (step % 4) * 320, time);
+                        g.gain.setValueAtTime(0.0001, time);
+                        g.gain.linearRampToValueAtTime(0.011, time + 0.005);
+                        g.gain.exponentialRampToValueAtTime(0.0001, time + 0.08);
+                        o.connect(g);
+                        g.connect(audioCtx.destination);
+                        o.start(time);
+                        o.stop(time + 0.09);
+                    }
+                } catch (_) {}
+            }
+
+            function tickMusic() {
+                try {
+                    if (!musicOn || !audioCtx || audioCtx.state !== 'running') {
+                        loopRunning = false;
+                        return;
+                    }
+                    const now = audioCtx.currentTime;
+                    if (Number.isFinite(now)) {
+                        const item = SEQ[stepIdx];
+                        if (item) {
+                            if (item.m) playLead(item.m, now, 0.30);
+                            if (item.b) playBass(item.b, now);
+                            if (item.ch) playChords(item.ch, now);
+                        }
+                        playGroove(stepIdx, now);
+                    }
+                    stepIdx = (stepIdx + 1) % SEQ.length;
+                    stepTimer = setTimeout(tickMusic, 235);
+                } catch (_) {
+                    loopRunning = false;
+                }
+            }
+
+            function playBounceChime() {
+                try {
+                    if (!musicOn || !audioCtx || audioCtx.state !== 'running') return;
+                    const notes = [N.F5, N.C5, N.A4, N.D5];
+                    const freq = notes[Math.floor(Math.random() * notes.length)];
+                    const now = audioCtx.currentTime;
+                    if (!Number.isFinite(now) || !Number.isFinite(freq) || freq <= 0) return;
+
+                    const o = audioCtx.createOscillator();
+                    const g = audioCtx.createGain();
+                    o.type = 'sine';
+                    o.frequency.setValueAtTime(freq * 1.5, now);
+                    g.gain.setValueAtTime(0.0001, now);
+                    g.gain.linearRampToValueAtTime(0.028, now + 0.01);
+                    g.gain.exponentialRampToValueAtTime(0.0001, now + 0.20);
+                    o.connect(g);
+                    g.connect(audioCtx.destination);
+                    o.start(now);
+                    o.stop(now + 0.22);
+                } catch (_) {}
+            }
+
+            const musicBtn = document.getElementById('music-btn');
+            function syncMusicBtn() {
+                if (musicBtn) musicBtn.textContent = musicOn ? '🔊' : '🔇';
+            }
+
+            function startMusic() {
+                musicOn = true;
+                syncMusicBtn();
+                unlockAudio().then(function () {
+                    if (audioCtx && audioCtx.state === 'running' && musicOn && !loopRunning) {
+                        loopRunning = true;
+                        clearTimeout(stepTimer);
+                        tickMusic();
+                    }
+                }).catch(function () {});
+            }
+
+            function stopMusic() {
+                musicOn = false;
+                loopRunning = false;
+                clearTimeout(stepTimer);
+                syncMusicBtn();
+            }
+
+            musicBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (musicOn) stopMusic();
+                else startMusic();
+            });
+
+            /* =================================================================
+               7. NAVIGASI SCROLL & PEMBUKAAN SPLASH COVER
+            ================================================================= */
+            const cardScroll = document.getElementById('card-scroll');
+            const splashEl = document.getElementById('splash');
+            const openBtn = document.getElementById('open-invite-btn');
+            const toGiftBtn = document.getElementById('btn-to-gift');
+            const toTopBtn = document.getElementById('btn-to-top');
+
+            function openInvitation() {
+                if (splashDismissed) return;
+                splashDismissed = true;
+
+                startMusic();
+                activateSensorsSilently();
+
+                if (splashEl) {
+                    splashEl.classList.add('fade-out');
+                    setTimeout(function () {
+                        splashEl.style.display = 'none';
+                    }, 560);
+                }
+
+                setTimeout(function () {
+                    for (let i = 0; i < 3 && i < chars.length; i++) {
+                        chars[i].say(90);
+                    }
+                }, 320);
+            }
+
+            splashEl.addEventListener('click', openInvitation);
+            openBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                openInvitation();
+            });
+
+            toGiftBtn.addEventListener('click', function () {
+                const target = document.getElementById('tukar-kado');
+                if (cardScroll && target) {
+                    const topPos = target.getBoundingClientRect().top - cardScroll.getBoundingClientRect().top + cardScroll.scrollTop - 12;
+                    cardScroll.scrollTo({ top: Math.max(0, topPos), behavior: 'smooth' });
+                }
+            });
+
+            toTopBtn.addEventListener('click', function () {
+                if (cardScroll) {
+                    cardScroll.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+
+            /* =================================================================
+               8. ANIMATION LOOP (60 FPS) & INISIALISASI
+            ================================================================= */
+            function animate() {
+                try {
+                    tSec += 0.016;
+                    renderBackground();
+
+                    charCtx.clearRect(0, 0, W, H);
+                    for (let i = 0; i < chars.length; i++) {
+                        chars[i].update();
+                    }
+                    resolveCollisions();
+                    for (let i = 0; i < chars.length; i++) {
+                        chars[i].draw(charCtx);
+                    }
+                    renderSparks(charCtx);
+                } catch (_) {
+                    // Jaga loop tetap hidup meski terjadi error tunggal pada frame ini
+                } finally {
+                    requestAnimationFrame(animate);
+                }
+            }
+
+            window.addEventListener('resize', resizeAll);
+            window.addEventListener('DOMContentLoaded', function () {
+                resizeAll();
+                drawSplashPreviews();
+                spawnInitialCharacters();
+                requestAnimationFrame(animate);
+            });
+        })();
+    </script>
+</body>
+</html>
