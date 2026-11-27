@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#050914">
     <meta property="og:title" content="Undangan Natal Remaja - SILENT NIGHT (MDC Kadipaten)">
-    <meta property="og:description" content="Youth Christmas Celebration • Senin, 21 Desember 2026 • 15:00 WIB di GKPB MDC Kadipaten. Ada konsumsi, souvenir, doorprize & tukar kado!">
+    <meta property="og:description" content="Senin, 21 Desember 2026 • 15:00 WIB di GKPB MDC Kadipaten. Ada konsumsi, souvenir, doorprize & tukar kado!">
     <meta property="og:type" content="website">
     <title>Undangan Natal Remaja - SILENT NIGHT (MDC Kadipaten)</title>
     <style>
@@ -478,13 +478,20 @@
         }
 
         /* Tombol Google Maps Pill Midnight-Gold */
+        .maps-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin-top: 9px;
+        }
+
         .btn-maps {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
-            margin-top: 8px;
-            padding: 7px 14px;
+            padding: 8px 14px;
             border-radius: 999px;
             background: rgba(245, 214, 138, 0.14);
             border: 1px solid rgba(245, 214, 138, 0.35);
@@ -494,7 +501,15 @@
             text-decoration: none;
             letter-spacing: 0.02em;
             cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
             transition: transform 0.16s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn-maps-copy {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(245, 214, 138, 0.24);
+            color: #e2e8f0;
         }
 
         .btn-maps:hover {
@@ -893,13 +908,17 @@
                             <div class="info-icon" aria-hidden="true">📍</div>
                             <div class="info-text">
                                 <span class="info-label">Lokasi</span>
-                                <p class="info-value-loc">GKPB MDC Kadipaten &mdash; Jl. Ampera No.21, Kadipaten, Kec. Kadipaten, Kabupaten Majalengka, Jawa Barat 45452</p>
-                                <a href="https://www.google.com/maps/search/?api=1&query=GKPB+MDC+Kadipaten+Jl.+Ampera+No.21+Kadipaten+Majalengka&query_place_id=ChIJYyUNHQApby4RQz8tZv3cc5c"
-                                   target="_blank"
-                                   rel="noopener noreferrer"
-                                   class="btn-maps">
-                                    🗺️ Buka di Google Maps
-                                </a>
+                                <p class="info-value-loc">GKPB MDC Kadipaten &mdash; Jl. Ampera No.21, Kadipaten, Kec. Kadipaten, Kabupaten Majalengka</p>
+                                <div class="maps-actions">
+                                    <a id="btn-maps-link"
+                                       class="btn-maps"
+                                       href="https://www.google.com/maps/search/?api=1&query=GKPB+MDC+Kadipaten,+Jl.+Ampera+No.21,+Kadipaten,+Majalengka&query_place_id=ChIJYyUNHQApby4RQz8tZv3cc5c">
+                                        🗺️ Buka di Google Maps
+                                    </a>
+                                    <button type="button" id="btn-copy-addr" class="btn-maps btn-maps-copy">
+                                        📋 Salin Alamat
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2113,7 +2132,7 @@
 
             window.addEventListener('touchstart', function (e) {
                 if (!splashDismissed || !e.changedTouches || !e.changedTouches.length) return;
-                if (e.target && e.target.closest && e.target.closest('#music-btn, button, a')) return;
+                if (e.target && e.target.closest && e.target.closest('#music-btn, button, a, .btn-maps')) return;
                 const t = e.changedTouches[0];
                 const hit = hitTestChar(t.clientX, t.clientY);
                 if (hit) {
@@ -2151,7 +2170,7 @@
 
             window.addEventListener('mousedown', function (e) {
                 if (!splashDismissed || e.button !== 0) return;
-                if (e.target && e.target.closest && e.target.closest('#music-btn, button, a')) return;
+                if (e.target && e.target.closest && e.target.closest('#music-btn, button, a, .btn-maps')) return;
                 const hit = hitTestChar(e.clientX, e.clientY);
                 if (hit) {
                     beginGrab(hit, e.clientX, e.clientY);
@@ -2297,18 +2316,26 @@
             ];
 
             function unlockAudio() {
-                const AC = window.AudioContext || window.webkitAudioContext;
-                if (!AC) return Promise.resolve();
-                if (!audioCtx) audioCtx = new AC();
                 try {
-                    const buf = audioCtx.createBuffer(1, 1, 22050);
-                    const src = audioCtx.createBufferSource();
-                    src.buffer = buf;
-                    src.connect(audioCtx.destination);
-                    src.start(0);
-                } catch (_) {}
-                if (audioCtx.state === 'suspended') return audioCtx.resume();
-                return Promise.resolve();
+                    const AC = window.AudioContext || window.webkitAudioContext;
+                    if (!AC) return Promise.resolve();
+                    if (!audioCtx) {
+                        audioCtx = new AC();
+                    }
+                    try {
+                        const buf = audioCtx.createBuffer(1, 1, 22050);
+                        const src = audioCtx.createBufferSource();
+                        src.buffer = buf;
+                        src.connect(audioCtx.destination);
+                        src.start(0);
+                    } catch (_) {}
+                    if (audioCtx.state === 'suspended') {
+                        return audioCtx.resume();
+                    }
+                    return Promise.resolve();
+                } catch (_) {
+                    return Promise.resolve();
+                }
             }
 
             function playLead(freq, time, dur) {
@@ -2433,26 +2460,20 @@
             }
 
             function tickMusic() {
-                try {
-                    if (!musicOn || !audioCtx || audioCtx.state !== 'running') {
-                        loopRunning = false;
-                        return;
-                    }
-                    const now = audioCtx.currentTime;
-                    if (Number.isFinite(now)) {
-                        const item = SEQ[stepIdx];
-                        if (item) {
-                            if (item.m) playLead(item.m, now, 0.30);
-                            if (item.b) playBass(item.b, now);
-                            if (item.ch) playChords(item.ch, now);
-                        }
-                        playGroove(stepIdx, now);
-                    }
-                    stepIdx = (stepIdx + 1) % SEQ.length;
-                    stepTimer = setTimeout(tickMusic, 235);
-                } catch (_) {
+                if (!musicOn || !audioCtx || audioCtx.state !== 'running') {
                     loopRunning = false;
+                    return;
                 }
+                const now = audioCtx.currentTime;
+                const item = SEQ[stepIdx];
+                if (item) {
+                    if (item.m) playLead(item.m, now, 0.30);
+                    if (item.b) playBass(item.b, now);
+                    if (item.ch) playChords(item.ch, now);
+                }
+                playGroove(stepIdx, now);
+                stepIdx = (stepIdx + 1) % SEQ.length;
+                stepTimer = setTimeout(tickMusic, 235);
             }
 
             function playBounceChime() {
@@ -2515,6 +2536,74 @@
             const openBtn = document.getElementById('open-invite-btn');
             const toGiftBtn = document.getElementById('btn-to-gift');
             const toTopBtn = document.getElementById('btn-to-top');
+            const mapsBtn = document.getElementById('btn-maps-link');
+            const copyAddrBtn = document.getElementById('btn-copy-addr');
+
+            if (mapsBtn) {
+                mapsBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const webUrl = this.getAttribute('href');
+                    const ua = navigator.userAgent || '';
+                    const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+                    // Khusus iOS (termasuk WhatsApp In-App Browser): panggil aplikasi Google Maps langsung via comgooglemaps://
+                    // lalu fallback ke link web resmi jika aplikasi belum terpasang.
+                    if (isIOS) {
+                        e.preventDefault();
+                        const appUrl = 'comgooglemaps://?q=GKPB+MDC+Kadipaten,+Jl.+Ampera+No.21,+Kadipaten,+Majalengka';
+                        let leftPage = false;
+
+                        const onLeave = function () {
+                            leftPage = true;
+                            document.removeEventListener('visibilitychange', onVisChange);
+                            window.removeEventListener('pagehide', onLeave);
+                        };
+                        const onVisChange = function () {
+                            if (document.hidden) onLeave();
+                        };
+
+                        document.addEventListener('visibilitychange', onVisChange);
+                        window.addEventListener('pagehide', onLeave);
+
+                        window.location.href = appUrl;
+
+                        setTimeout(function () {
+                            document.removeEventListener('visibilitychange', onVisChange);
+                            window.removeEventListener('pagehide', onLeave);
+                            if (!leftPage && !document.hidden) {
+                                window.location.href = webUrl;
+                            }
+                        }, 1100);
+                    }
+                    // Untuk Android & Desktop: biarkan navigasi native <a href> berjalan alami tanpa bentrok JS
+                });
+            }
+
+            if (copyAddrBtn) {
+                copyAddrBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const addrText = 'GKPB MDC Kadipaten, Jl. Ampera No.21, Kadipaten, Kec. Kadipaten, Kabupaten Majalengka, Jawa Barat 45452';
+                    let copied = false;
+                    try {
+                        const ta = document.createElement('textarea');
+                        ta.value = addrText;
+                        ta.setAttribute('readonly', '');
+                        ta.style.position = 'fixed';
+                        ta.style.opacity = '0';
+                        ta.style.left = '-9999px';
+                        document.body.appendChild(ta);
+                        ta.focus();
+                        ta.select();
+                        copied = document.execCommand('copy');
+                        document.body.removeChild(ta);
+                    } catch (_) {}
+
+                    copyAddrBtn.textContent = copied ? '✓ Alamat Tersalin' : '📍 GKPB MDC Kadipaten';
+                    setTimeout(function () {
+                        copyAddrBtn.textContent = '📋 Salin Alamat';
+                    }, 2200);
+                });
+            }
 
             function openInvitation() {
                 if (splashDismissed) return;
@@ -2536,6 +2625,10 @@
                     }
                 }, 320);
             }
+
+            // Buka kunci audio sinkron sejak jari menyentuh splash cover / tombol buka undangan
+            splashEl.addEventListener('touchstart', unlockAudio, { passive: true });
+            openBtn.addEventListener('touchstart', unlockAudio, { passive: true });
 
             splashEl.addEventListener('click', openInvitation);
             openBtn.addEventListener('click', function (e) {
